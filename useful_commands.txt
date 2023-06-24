@@ -20,5 +20,3 @@ bin/console doctrine:query:sql "TRUNCATE TABLE migration_versions"
 scp -r app 21_pstragowski@wierzba.wzks.uj.edu.pl:~
 
 bin/console debug:route
-
-dupa dupa
