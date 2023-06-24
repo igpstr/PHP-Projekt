@@ -1,15 +1,13 @@
 <?php
 /**
- * Task controller.
+ * User controller.
  */
 
 namespace App\Controller;
 
-use App\Entity\Task;
-use App\Form\Type\TaskType;
-use App\Service\TaskServiceInterface;
 use App\Entity\User;
-//use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use App\Form\Type\UserType;
+use App\Service\UserServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,15 +16,15 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * Class TaskController.
+ * Class UserController.
  */
-#[Route('/task')]
-class TaskController extends AbstractController
+#[Route('/user')]
+class UserController extends AbstractController
 {
     /**
-     * Task service.
+     * User service.
      */
-    private TaskServiceInterface $taskService;
+    private UserServiceInterface $userService;
 
     /**
      * Translator.
@@ -36,12 +34,12 @@ class TaskController extends AbstractController
     /**
      * Constructor.
      *
-     * @param TaskServiceInterface $taskService Task service
+     * @param UserServiceInterface $userService User service
      * @param TranslatorInterface  $translator  Translator
      */
-    public function __construct(TaskServiceInterface $taskService, TranslatorInterface $translator)
+    public function __construct(UserServiceInterface $userService, TranslatorInterface $translator)
     {
-        $this->taskService = $taskService;
+        $this->userService = $userService;
         $this->translator = $translator;
     }
 
@@ -52,28 +50,27 @@ class TaskController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route(name: 'task_index', methods: 'GET')]
+    #[Route(name: 'user_index', methods: 'GET')]
     public function index(Request $request): Response
     {
-        $pagination = $this->taskService->getPaginatedList(
+        $pagination = $this->userService->getPaginatedList(
             $request->query->getInt('page', 1)
         );
 
-        return $this->render('task/index.html.twig', ['pagination' => $pagination]);
+        return $this->render('user/index.html.twig', ['pagination' => $pagination]);
     }
 
     /**
      * Show action.
      *
-     * @param Task $task Task entity
+     * @param User $user User entity
      *
      * @return Response HTTP response
      */
-    #[Route('/{id}', name: 'task_show', requirements: ['id' => '[1-9]\d*'], methods: 'GET')]
-    #[IsGranted('VIEW', subject: 'task')]
-    public function show(Task $task): Response
+    #[Route('/{id}', name: 'user_show', requirements: ['id' => '[1-9]\d*'], methods: 'GET')]
+    public function show(User $user): Response
     {
-        return $this->render('task/show.html.twig', ['task' => $task]);
+        return $this->render('user/show.html.twig', ['user' => $user]);
     }
 
     /**
@@ -83,75 +80,68 @@ class TaskController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route('/create', name: 'task_create', methods: 'GET|POST')]
+    #[Route('/create', name: 'user_create', methods: 'GET|POST', )]
     public function create(Request $request): Response
     {
-        /** @var User $user */
-        $user = $this->getUser();
-        $task = new Task();
-        $task->setAuthor($user);
+        $user = new User();
         $form = $this->createForm(
-            TaskType::class,
-            $task,
-            ['action' => $this->generateUrl('task_create')]
+            UserType::class,
+            $user,
+            ['action' => $this->generateUrl('user_create')]
         );
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->taskService->save($task);
+            $this->userService->save($user);
 
             $this->addFlash(
                 'success',
                 $this->translator->trans('message.created_successfully')
             );
 
-            return $this->redirectToRoute('task_index');
+            return $this->redirectToRoute('user_index');
         }
 
-        return $this->render(
-            'task/create.html.twig',
-            ['form' => $form->createView()]
-        );
+        return $this->render('user/create.html.twig',  ['form' => $form->createView()]);
     }
 
     /**
      * Edit action.
      *
      * @param Request $request HTTP request
-     * @param Task    $task    Task entity
+     * @param User    $user    User entity
      *
      * @return Response HTTP response
      */
-    #[Route('/{id}/edit', name: 'task_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
-    #[IsGranted('EDIT', subject: 'task')]
-    public function edit(Request $request, Task $task): Response
+    #[Route('/{id}/edit', name: 'user_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
+    public function edit(Request $request, User $user): Response
     {
         $form = $this->createForm(
-            TaskType::class,
-            $task,
+            UserType::class,
+            $user,
             [
                 'method' => 'PUT',
-                'action' => $this->generateUrl('task_edit', ['id' => $task->getId()]),
+                'action' => $this->generateUrl('user_edit', ['id' => $user->getId()]),
             ]
         );
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->taskService->save($task);
+            $this->userService->save($user);
 
             $this->addFlash(
                 'success',
                 $this->translator->trans('message.edited_successfully')
             );
 
-            return $this->redirectToRoute('task_index');
+            return $this->redirectToRoute('user_index');
         }
 
         return $this->render(
-            'task/edit.html.twig',
+            'user/edit.html.twig',
             [
                 'form' => $form->createView(),
-                'task' => $task,
+                'user' => $user,
             ]
         );
     }
@@ -160,40 +150,39 @@ class TaskController extends AbstractController
      * Delete action.
      *
      * @param Request $request HTTP request
-     * @param Task    $task    Task entity
+     * @param User    $user    User entity
      *
      * @return Response HTTP response
      */
-    #[Route('/{id}/delete', name: 'task_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
-    #[IsGranted('DELETE', subject: 'task')]
-    public function delete(Request $request, Task $task): Response
+    #[Route('/{id}/delete', name: 'user_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
+    public function delete(Request $request, User $user): Response
     {
         $form = $this->createForm(
             FormType::class,
-            $task,
+            $user,
             [
                 'method' => 'DELETE',
-                'action' => $this->generateUrl('task_delete', ['id' => $task->getId()]),
+                'action' => $this->generateUrl('user_delete', ['id' => $user->getId()]),
             ]
         );
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->taskService->delete($task);
+            $this->userService->delete($user);
 
             $this->addFlash(
                 'success',
                 $this->translator->trans('message.deleted_successfully')
             );
 
-            return $this->redirectToRoute('task_index');
+            return $this->redirectToRoute('user_index');
         }
 
         return $this->render(
-            'task/delete.html.twig',
+            'user/delete.html.twig',
             [
                 'form' => $form->createView(),
-                'task' => $task,
+                'user' => $user,
             ]
         );
     }
