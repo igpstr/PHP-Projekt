@@ -13,10 +13,18 @@
     <a href="{{ url('tag_index') }}" title="{{ 'tag_index'|trans }}">
         {{ 'Tags'|trans }}
     </a>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a> | </a>
+        <a href="{{ url('user_index') }}" title="{{ 'user_index'|trans }}">
+            {{ 'Users'|trans }}
+        </a>
+    {% endif %}
     <br>
-    <a href="{{ url('task_create') }}" title="{{ 'action.create'|trans }}">
-        {{ 'Create a new task'|trans }}
-    </a>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ url('task_create') }}" title="{{ 'action.create'|trans }}">
+            {{ 'Create a new task'|trans }}
+        </a>
+    {% endif %}
     {% if pagination is defined and pagination.items|length %}
 
         <div class="navigation text-center">
@@ -55,15 +63,17 @@
                             </a>
                         {# {% endif %} #}
                         {# {% if is_granted('EDIT', task) %} #}
+                        {% if is_granted('ROLE_ADMIN') %}
                             <a class="btn btn-outline-success" href="{{ url('task_edit', {id: task.id}) }}" title="{{ 'action.edit'|trans }}">
                                 {{ 'Edit'|trans }}
                             </a>
-                        {# {% endif %} #}
+                         {% endif %}
                         {# {% if is_granted('DELETE', task) %} #}
+                        {% if is_granted('ROLE_ADMIN') %}
                             <a class="btn btn-outline-danger" href="{{ url('task_delete', {id: task.id}) }}" title="{{ 'action.delete'|trans }}">
                                 {{ 'Delete'|trans }}
                             </a>
-                        {# {% endif %} #}
+                         {% endif %}
                     </td>
                 </tr>
             {% endfor %}

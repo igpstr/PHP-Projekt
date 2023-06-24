@@ -5,18 +5,23 @@
 {% endblock %}
 
 {% block body %}
+    {% if is_granted('ROLE_ADMIN') %}
     <h1>{{ 'Users List'|trans }}</h1>
-{#    <a href="{{ url('category_index') }}" title="{{ 'category_index'|trans }}">#}
-{#        {{ 'Categories'|trans }}#}
-{#    </a>#}
-{#    <a> | </a>#}
-{#    <a href="{{ url('tag_index') }}" title="{{ 'tag_index'|trans }}">#}
-{#        {{ 'Tags'|trans }}#}
-{#    </a>#}
-{#    <br>#}
-{#    <a href="{{ url('user_create') }}" title="{{ 'action.create'|trans }}">#}
-{#        {{ 'Create a new user'|trans }}#}
-{#    </a>#}
+    <a href="{{ url('task_index') }}" title="{{ 'task_index'|trans }}">
+        {{ 'Tasks'|trans }}
+    </a>
+    <a> | </a>
+    <a href="{{ url('category_index') }}" title="{{ 'category_index'|trans }}">
+        {{ 'Categories'|trans }}
+    </a>
+    <a> | </a>
+    <a href="{{ url('tag_index') }}" title="{{ 'tag_index'|trans }}">
+        {{ 'Tags'|trans }}
+    </a>
+    <br>
+    <a href="{{ url('user_create') }}" title="{{ 'action.create'|trans }}">
+        {{ 'Create a new user'|trans }}
+    </a>
     {% if pagination is defined and pagination.items|length %}
 
         <div class="navigation text-center">
@@ -41,21 +46,15 @@
                     <td>{{ user.roles|join(', ') }}</td>
                     <td>{{ user.password }}</td>
                     <td>
-{#                        #}{# {% if is_granted('VIEW', user) %} #}
-{#                        <a class="btn btn-outline-primary" href="{{ url('user_show', {id: user.id}) }}" title="{{ 'action.show'|trans }}">#}
-{#                            {{ 'Show'|trans }}#}
-{#                        </a>#}
-{#                        #}{# {% endif %} #}
-{#                        #}{# {% if is_granted('EDIT', user) %} #}
-{#                        <a class="btn btn-outline-success" href="{{ url('user_edit', {id: user.id}) }}" title="{{ 'action.edit'|trans }}">#}
-{#                            {{ 'Edit'|trans }}#}
-{#                        </a>#}
-{#                        #}{# {% endif %} #}
-{#                        #}{# {% if is_granted('DELETE', user) %} #}
-{#                        <a class="btn btn-outline-danger" href="{{ url('user_delete', {id: user.id}) }}" title="{{ 'action.delete'|trans }}">#}
-{#                            {{ 'Delete'|trans }}#}
-{#                        </a>#}
-{#                        #}{# {% endif %} #}
+                        <a class="btn btn-outline-primary" href="{{ url('user_show', {id: user.id}) }}" title="{{ 'action.show'|trans }}">
+                            {{ 'Show'|trans }}
+                        </a>
+                        <a class="btn btn-outline-success" href="{{ url('user_edit', {id: user.id}) }}" title="{{ 'action.edit'|trans }}">
+                            {{ 'Edit'|trans }}
+                        </a>
+                        <a class="btn btn-outline-danger" href="{{ url('user_delete', {id: user.id}) }}" title="{{ 'action.delete'|trans }}">
+                            {{ 'Delete'|trans }}
+                        </a>
                     </td>
                 </tr>
             {% endfor %}
@@ -70,5 +69,8 @@
         <p>
             {{ 'message.empty_list'|trans }}
         </p>
+    {% endif %}
+    {% else %}
+        <p>{{ 'Access denied'|trans }}</p>
     {% endif %}
 {% endblock %}
