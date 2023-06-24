@@ -21,4 +21,4 @@ scp -r app 21_pstragowski@wierzba.wzks.uj.edu.pl:~
 
 bin/console debug:route
 
-dupa
+dupa dupa
