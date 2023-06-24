@@ -1,0 +1,18 @@
+{% if is_granted('ROLE_ADMIN') %}
+    {% include 'default/_form.html.twig' with {
+        page_title: 'title.category_delete'|trans({'%id%': category.id|default('')}),
+        form: form,
+        submit_label: 'action.delete'|trans,
+        back_to_list_path: 'category_index',
+    } %}
+{% else %}
+    {% if is_granted('ROLE_USER') %}
+        <p>{{ 'Access denied'|trans }}</p>
+    {% else %}
+        {% set loginRoute = path('app_login') %}
+        {% set loginRedirect = path(app.request.attributes.get('_route'), app.request.query.all|merge({'id': category.id})) %}
+        <script>
+            window.location.href = "{{ loginRoute }}?redirect={{ loginRedirect }}";
+        </script>
+    {% endif %}
+{% endif %}

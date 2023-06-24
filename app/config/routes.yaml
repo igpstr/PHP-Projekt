@@ -1,0 +1,4 @@
+# routes.yaml
+index:
+    path: /
+    controller: App\Controller\TaskController::index
