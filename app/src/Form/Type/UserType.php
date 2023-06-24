@@ -7,7 +7,7 @@ namespace App\Form\Type;
 
 use App\Entity\Category;
 use App\Entity\User;
-use App\Form\DataTransformer\TagsDataTransformer;
+use App\Form\DataTransformer\UserDataTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -20,22 +20,22 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class UserType extends AbstractType
 {
-    /**
-     * Tags data transformer.
-     *
-     * @var TagsDataTransformer
-     */
-    private TagsDataTransformer $tagsDataTransformer;
-
-    /**
-     * Constructor.
-     *
-     * @param TagsDataTransformer $tagsDataTransformer Tags data transformer
-     */
-    public function __construct(TagsDataTransformer $tagsDataTransformer)
-    {
-        $this->tagsDataTransformer = $tagsDataTransformer;
-    }
+//    /**
+//     * User data transformer.
+//     *
+//     * @var UserDataTransformer
+//     */
+//    private UserDataTransformer $tagsDataTransformer;
+//
+//    /**
+//     * Constructor.
+//     *
+//     * @param UserDataTransformer $tagsDataTransformer User data transformer
+//     */
+//    public function __construct(UserDataTransformer $tagsDataTransformer)
+//    {
+//        $this->tagsDataTransformer = $tagsDataTransformer;
+//    }
 
     /**
      * Builds the form.
