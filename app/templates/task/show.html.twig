@@ -17,7 +17,13 @@
             <dt>{{ 'label.title'|trans }}</dt>
             <dd>{{  task.title }}</dd>
             <dt>{{ 'label.category'|trans }}</dt>
-            <dd>{{  task.category.title }}</dd>
+            <dd><a class="btn btn-outline-info">{{  task.category.title }}</a></dd>
+            <dt>{{ 'label.tag'|trans }}</dt>
+            <dd>
+            {% for tag in task.tags %}
+                <a class="btn btn-outline-dark">{{ tag.title }}</a>
+            {% endfor %}
+            </dd>
         </dl>
         <p>
             <a href="{{ url('task_index') }}" title="{{ 'action.back_to_list'|trans }}">
