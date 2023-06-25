@@ -5,9 +5,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Tag;
 use App\Form\Type\TagType;
+use App\Repository\TaskRepository;
 use App\Service\TagServiceInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -63,14 +66,37 @@ class TagController extends AbstractController
     /**
      * Show action.
      *
-     * @param Tag $tag Tag entity
+     * @param Tag           $tag        Tag
+     * @param TaskRepository     $taskRepository  Task repository
+     * @param PaginatorInterface $paginator       Paginator
+     * @param Request            $request         HTTP request
      *
      * @return Response HTTP response
      */
-    #[Route('/{id}', name: 'tag_show', requirements: ['id' => '[1-9]\d*'], methods: 'GET')]
-    public function show(Tag $tag): Response
-    {
-        return $this->render('tag/show.html.twig', ['tag' => $tag]);
+    #[Route(
+        '/{id}',
+        name: 'tag_show',
+        requirements: ['id' => '[1-9]\d*'],
+        methods: 'GET'
+    )]
+    public function show(
+        Tag $tag,
+        TaskRepository $taskRepository,
+        PaginatorInterface $paginator,
+        Request $request
+    ): Response {
+        $tasksQuery = $taskRepository->findTasksByTag($tag);
+
+        $pagination = $paginator->paginate(
+            $tasksQuery,
+            $request->query->getInt('page', 1),
+            10
+        );
+
+        return $this->render('tag/show.html.twig', [
+            'tag' => $tag,
+            'pagination' => $pagination,
+        ]);
     }
 
     /**

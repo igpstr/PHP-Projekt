@@ -7,7 +7,9 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Form\Type\CategoryType;
+use App\Repository\TaskRepository;
 use App\Service\CategoryServiceInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -65,7 +67,10 @@ class CategoryController extends AbstractController
     /**
      * Show action.
      *
-     * @param Category $category Category
+     * @param Category           $category        Category
+     * @param TaskRepository     $taskRepository  Task repository
+     * @param PaginatorInterface $paginator       Paginator
+     * @param Request            $request         HTTP request
      *
      * @return Response HTTP response
      */
@@ -75,9 +80,24 @@ class CategoryController extends AbstractController
         requirements: ['id' => '[1-9]\d*'],
         methods: 'GET'
     )]
-    public function show(Category $category): Response
-    {
-        return $this->render('category/show.html.twig', ['category' => $category]);
+    public function show(
+        Category $category,
+        TaskRepository $taskRepository,
+        PaginatorInterface $paginator,
+        Request $request
+    ): Response {
+        $tasksQuery = $taskRepository->findTasksByCategory($category);
+
+        $pagination = $paginator->paginate(
+            $tasksQuery,
+            $request->query->getInt('page', 1),
+            10
+        );
+
+        return $this->render('category/show.html.twig', [
+            'category' => $category,
+            'pagination' => $pagination,
+        ]);
     }
 
     /**

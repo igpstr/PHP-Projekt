@@ -6,6 +6,7 @@
 namespace App\Repository;
 
 use App\Entity\Category;
+use App\Entity\Tag;
 use App\Entity\Task;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
@@ -115,6 +116,36 @@ class TaskRepository extends ServiceEntityRepository
     private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
     {
         return $queryBuilder ?? $this->createQueryBuilder('task');
+    }
+
+    /**
+     * Find tasks by category.
+     *
+     * @param Category $category
+     * @return QueryBuilder
+     */
+    public function findTasksByCategory(Category $category): QueryBuilder
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.category = :category')
+            ->setParameter('category', $category);
+    }
+
+    /**
+     * Find tasks by tag.
+     *
+     * @param int $tagId Tag ID
+     *
+     * @return Task[] Task entities
+     */
+    public function findTasksByTag(Tag $tag): array
+    {
+        return $this->createQueryBuilder('t')
+            ->innerJoin('t.tags', 'tag')
+            ->where('tag.id = :tagId')
+            ->setParameter('tagId', $tag->getId())
+            ->getQuery()
+            ->getResult();
     }
 
 }

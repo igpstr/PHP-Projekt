@@ -17,11 +17,11 @@
             <dt>{{ 'label.title'|trans }}</dt>
             <dd>{{  task.title }}</dd>
             <dt>{{ 'label.category'|trans }}</dt>
-            <dd><a class="btn btn-outline-info">{{  task.category.title }}</a></dd>
+            <dd><a class="btn btn-outline-info" href="{{ url('category_show', {id: task.category.id}) }}">{{  task.category.title }}</a></dd>
             <dt>{{ 'label.tag'|trans }}</dt>
             <dd>
             {% for tag in task.tags %}
-                <a class="btn btn-outline-dark">{{ tag.title }}</a>
+                <a class="btn btn-outline-dark" href="{{ url('tag_show', {id: tag.id}) }}">{{ tag.title }}</a>
             {% endfor %}
             </dd>
         </dl>

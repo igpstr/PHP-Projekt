@@ -36,10 +36,12 @@
                     <td>{{ task.createdAt|format_date('long') }}</td>
                     <td>{{ task.updatedAt|format_date('long') }}</td>
                     <td>{{ task.title }}</td>
-                    <td><a class="btn btn-outline-info">{{ task.category.title }}</a></td>
+                    <td>
+                        <a class="btn btn-outline-info" href="{{ url('category_show', {id: task.category.id}) }}">{{ task.category.title }}</a>
+                    </td>
                     <td>
                             {% for tag in task.tags %}
-                                <a class="btn btn-outline-dark">{{ tag.title }}</a>
+                                <a class="btn btn-outline-dark" href="{{ url('tag_show', {id: tag.id}) }}">{{ tag.title }}</a>
                             {% endfor %}
                     </td>
                     <td>
