@@ -23,6 +23,7 @@
         {% else %}
             <div>
                 <a href="{{ url('app_login') }}">{{ 'Login'|trans }}</a>
+                <a href="{{ url('app_register') }}">{{ 'Register'|trans }}</a>
             </div>
         {% endif %}
         {% block body %}{% endblock %}
