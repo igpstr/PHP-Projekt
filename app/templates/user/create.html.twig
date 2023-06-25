@@ -1,8 +1,8 @@
 {% if is_granted('ROLE_ADMIN') %}
     {% include 'default/_form.html.twig' with {
-        page_title: 'title.user_create'|trans,
+        page_title: 'Create a new user'|trans,
         form: form,
-        submit_label: 'action.save'|trans,
+        submit_label: 'Create'|trans,
         back_to_list_path: 'user_index',
     } %}
 {% else %}

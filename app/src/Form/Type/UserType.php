@@ -6,14 +6,18 @@
 namespace App\Form\Type;
 
 use App\Entity\Category;
+use App\Entity\Enum\UserRole;
 use App\Entity\User;
-use App\Form\DataTransformer\UserDataTransformer;
+//use App\Form\DataTransformer\UserDataTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 /**
  * Class UserType.
@@ -36,6 +40,12 @@ class UserType extends AbstractType
 //    {
 //        $this->tagsDataTransformer = $tagsDataTransformer;
 //    }
+    private AuthorizationCheckerInterface $authorizationChecker;
+
+    public function __construct(AuthorizationCheckerInterface $authorizationChecker)
+    {
+        $this->authorizationChecker = $authorizationChecker;
+    }
 
     /**
      * Builds the form.
@@ -58,6 +68,7 @@ class UserType extends AbstractType
                 'required' => true,
                 'attr' => ['max_length' => 255],
             ]);
+        if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
         $builder->add(
             'roles',
             ChoiceType::class,
@@ -71,6 +82,14 @@ class UserType extends AbstractType
                 'required' => true,
             ]
         );
+        }
+        else {
+            // Set the role to ROLE_USER for non-admin users
+            $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
+                $user = $event->getData();
+                $user->setRoles([UserRole::ROLE_USER->value]);
+            });
+        }
         $builder->add(
             'password',
             TextType::class,
