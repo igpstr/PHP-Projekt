@@ -12,20 +12,58 @@
     {% endblock %}
 </head>
 <body>
+<header style="background-color: lightgray" class="header">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light justify-content-between flex-column-reverse flex-xxl-row">
+            <div class="d-flex navbar-container">
+                    <ul class="navbar-nav d-flex justify-content-around w-100 mb-2 mb-lg-0">
+                        <li>
+                            <a href="{{ url('task_index') }}" class="nav-link link-dark" title="{{ 'task_index'|trans }}">
+                                {{ 'Tasks'|trans }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url('category_index') }}" class="nav-link link-dark" title="{{ 'category_index'|trans }}">
+                                {{ 'Categories'|trans }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url('tag_index') }}" class="nav-link link-dark" title="{{ 'tag_index'|trans }}">
+                                {{ 'Tags'|trans }}
+                            </a>
+                        </li>
+                        <li>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a href="{{ url('user_index') }}" class="nav-link link-dark" title="{{ 'user_index'|trans }}">
+                                    {{ 'Users'|trans }}
+                                </a>
+                            {% endif %}
+                        </li>
+                    </ul>
+            </div>
+
+            <div class="d-flex flex-nowrap ms-auto mb-3 mb-lg-0">
+                <div class="text-end nav-social">
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <div>
+                            {{ app.user.email }}
+                            <a href="{{ url('app_logout') }}" class="btn btn-dark">{{ 'Logout'|trans }}</a>
+                        </div>
+                    {% else %}
+                        <div>
+                            <a href="{{ url('app_login') }}" class="btn btn-dark">{{ 'Login'|trans }}</a>
+                            <a href="{{ url('app_register') }}" class="btn btn-dark">{{ 'Register'|trans }}</a>
+                        </div>
+                    {% endif %}
+                   </div>
+            </div>
+        </nav>
+    </div>
+</header>
 <main role="main" class="container-fluid">
     <div class="container-fluid">
         {% include 'default/_flash_messages.html.twig' %}
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <div>{{ app.user.email }}</div>
-            <div>
-                <a href="{{ url('app_logout') }}">{{ 'Logout'|trans }}</a>
-            </div>
-        {% else %}
-            <div>
-                <a href="{{ url('app_login') }}">{{ 'Login'|trans }}</a>
-                <a href="{{ url('app_register') }}">{{ 'Register'|trans }}</a>
-            </div>
-        {% endif %}
+
         {% block body %}{% endblock %}
     </div>
 </main>

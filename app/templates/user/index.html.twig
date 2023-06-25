@@ -7,18 +7,6 @@
 {% block body %}
     {% if is_granted('ROLE_ADMIN') %}
     <h1>{{ 'Users List'|trans }}</h1>
-    <a href="{{ url('task_index') }}" title="{{ 'task_index'|trans }}">
-        {{ 'Tasks'|trans }}
-    </a>
-    <a> | </a>
-    <a href="{{ url('category_index') }}" title="{{ 'category_index'|trans }}">
-        {{ 'Categories'|trans }}
-    </a>
-    <a> | </a>
-    <a href="{{ url('tag_index') }}" title="{{ 'tag_index'|trans }}">
-        {{ 'Tags'|trans }}
-    </a>
-    <br>
     <a href="{{ url('user_create') }}" title="{{ 'action.create'|trans }}">
         {{ 'Create a new user'|trans }}
     </a>

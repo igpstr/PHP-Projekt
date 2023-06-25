@@ -6,20 +6,6 @@
 
 {% block body %}
     <h1>{{ 'Tasks List'|trans }}</h1>
-    <a href="{{ url('category_index') }}" title="{{ 'category_index'|trans }}">
-        {{ 'Categories'|trans }}
-    </a>
-    <a> | </a>
-    <a href="{{ url('tag_index') }}" title="{{ 'tag_index'|trans }}">
-        {{ 'Tags'|trans }}
-    </a>
-    {% if is_granted('ROLE_ADMIN') %}
-        <a> | </a>
-        <a href="{{ url('user_index') }}" title="{{ 'user_index'|trans }}">
-            {{ 'Users'|trans }}
-        </a>
-    {% endif %}
-    <br>
     {% if is_granted('ROLE_ADMIN') %}
         <a href="{{ url('task_create') }}" title="{{ 'action.create'|trans }}">
             {{ 'Create a new task'|trans }}

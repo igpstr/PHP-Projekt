@@ -1,3 +1,10 @@
 p {
     color: red;
 }
+.header {
+    padding: 60px;
+    text-align: center;
+    background: #1abc9c;
+    color: red;
+    font-size: 30px;
+}
