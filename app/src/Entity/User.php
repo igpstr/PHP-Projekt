@@ -36,10 +36,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string|null
      */
     #[ORM\Column(type: 'string', length: 180, unique: true)]
-    #[Assert\NotNull]
+    #[Assert\NotBlank]
     #[Assert\Nick]
     //private ?string $nick;
-    private ?string $nick = 'sads';
+    private ?string $nick = '';
 
     /**
      * Email.

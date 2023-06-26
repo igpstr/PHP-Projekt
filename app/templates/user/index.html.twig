@@ -31,14 +31,7 @@
             {% for user in pagination.items %}
                 <tr>
                     <td>{{ user.id }}</td>
-                    <td>
-                        {% if user.nick is not null %}
-                            {{ dump(user.nick) }}
-                            {{ user.nick }}
-                        {% else %}
-                            N/A
-                        {% endif %}
-                    </td>
+                    <td>{{ user.nick }}</td>
                     <td>{{ user.email }}</td>
                     <td>{{ user.roles|join(', ') }}</td>
                     <td>{{ user.password }}</td>
