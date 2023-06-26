@@ -1,6 +1,6 @@
 <?php
 /**
- * User type.
+ * User edit type.
  */
 
 namespace App\Form\Type;
@@ -16,14 +16,15 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
 /**
- * Class UserType.
+ * Class UserEditType.
  */
-class UserType extends AbstractType
+class UserEditType extends AbstractType
 {
 //    /**
 //     * User data transformer.
@@ -42,9 +43,11 @@ class UserType extends AbstractType
 //        $this->tagsDataTransformer = $tagsDataTransformer;
 //    }
     private AuthorizationCheckerInterface $authorizationChecker;
+    private UserPasswordHasherInterface $passwordHasher;
 
-    public function __construct(AuthorizationCheckerInterface $authorizationChecker)
+    public function __construct(UserPasswordHasherInterface $passwordHasher, AuthorizationCheckerInterface $authorizationChecker)
     {
+        $this->passwordHasher = $passwordHasher;
         $this->authorizationChecker = $authorizationChecker;
     }
 
@@ -69,49 +72,40 @@ class UserType extends AbstractType
                 'required' => true,
                 'attr' => ['max_length' => 255],
             ]);
-        $builder->add(
-            'email',
-            TextType::class,
-            [
-                'label' => 'label.email',
-                'required' => true,
-                'attr' => ['max_length' => 255],
-            ]);
         if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
-        $builder->add(
-            'roles',
-            ChoiceType::class,
-            [
-                'label' => 'Roles',
-                'choices' => [
-                    'User' => 'ROLE_USER',
-                    'Admin' => 'ROLE_ADMIN',
-                ],
-                'multiple' => true,
-                'required' => true,
-            ]
-        );
-        }
-        else {
-            // Set the role to ROLE_USER for non-admin users
-            $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
-                $user = $event->getData();
-                $user->setRoles([UserRole::ROLE_USER->value]);
-            });
-        }
+            $builder->add(
+                'roles',
+                ChoiceType::class,
+                [
+                    'label' => 'Roles',
+                    'choices' => [
+                        'User' => 'ROLE_USER',
+                        'Admin' => 'ROLE_ADMIN',
+                    ],
+                    'multiple' => true,
+                    'required' => true,
+                ]
+            );}
         $builder->add(
             'password',
-            TextType::class,
+            PasswordType::class,
             [
                 'label' => 'label.password',
                 'required' => true,
-                'attr' => ['max_length' => 128],
-            ]
-        );
+                'attr' => ['max_length' => 64],
+            ]);
+        $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
+                $form = $event->getForm();
+                $user = $event->getData();
 
-//        $builder->get('tags')->addModelTransformer(
-//            $this->tagsDataTransformer
-//        );
+                // Hash the password
+                $hashedPassword = $this->passwordHasher->hashPassword($user, $user->getPassword());
+
+                // Set the hashed password
+                $user->setPassword($hashedPassword);
+
+                $event->setData($user);
+            });
     }
 
     /**

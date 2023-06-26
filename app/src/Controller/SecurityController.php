@@ -2,17 +2,18 @@
 
 namespace App\Controller;
 
-use App\Form\Type\UserType;
 use App\Entity\User;
+use App\Form\Type\EditAccountType;
+use App\Form\Type\UserType;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\Security\Core\Security;
 
 class SecurityController extends AbstractController
 {
@@ -82,7 +83,7 @@ class SecurityController extends AbstractController
         /** @var PasswordAuthenticatedUserInterface $user */
         $user = $security->getUser();
 
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(EditAccountType::class, $user);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
