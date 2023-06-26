@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block body %}
+    {% if is_granted('ROLE_ADMIN') %}
     <h1>{{ 'Comments List'|trans }}</h1>
     {% if is_granted('ROLE_ADMIN') %}
         <a href="{{ url('comment_create') }}" title="{{ 'action.create'|trans }}">
@@ -72,5 +73,8 @@
         <p>
             {{ 'message.empty_list'|trans }}
         </p>
+    {% endif %}
+    {% else %}
+        <p>{{ 'Access denied'|trans }}</p>
     {% endif %}
 {% endblock %}

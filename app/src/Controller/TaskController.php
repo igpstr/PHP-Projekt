@@ -7,9 +7,13 @@ namespace App\Controller;
 
 use App\Entity\Task;
 use App\Form\Type\TaskType;
+use App\Repository\CommentRepository;
+use App\Repository\TaskRepository;
+use App\Service\CommentService;
 use App\Service\TaskServiceInterface;
 use App\Entity\User;
 //use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -65,16 +69,34 @@ class TaskController extends AbstractController
     /**
      * Show action.
      *
-     * @param Task $task Task entity
+     * @param task $task task entity
      *
      * @return Response HTTP response
      */
-    #[Route('/{id}', name: 'task_show', requirements: ['id' => '[1-9]\d*'], methods: 'GET')]
-    #[IsGranted('VIEW', subject: 'task')]
-    public function show(Task $task): Response
+    #[Route(
+        '/{id}',
+        name: 'task_show',
+        requirements: ['id' => '[1-9]\d*'],
+        methods: 'GET',
+    )]
+    public function show(Request $request, CommentService $commentService, TaskRepository $taskRepository, Task $task): Response
     {
-        return $this->render('task/show.html.twig', ['task' => $task]);
+        $pagination = $commentService->getPaginatedListByTask($request->query->getInt('page', 1), $task);
+
+        return $this->render(
+            'task/show.html.twig',
+            ['task' => $task, 'pagination' => $pagination]
+        );
     }
+//    public function show(Task $task, CommentRepository $commentRepository): Response
+//    {
+//        $comments = $commentRepository->findCommentsByTask($task)->getQuery()->getResult();
+//
+//        return $this->render('task/show.html.twig', [
+//            'task' => $task,
+//            'comments' => $comments,
+//        ]);
+//    }
 
     /**
      * Create action.

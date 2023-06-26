@@ -6,6 +6,8 @@
 namespace App\Service;
 
 use App\Entity\Comment;
+use App\Entity\Task;
+use App\Entity\User;
 use App\Repository\CommentRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -48,6 +50,27 @@ class CommentService implements CommentServiceInterface
     {
         return $this->paginator->paginate(
             $this->commentRepository->queryAll(),
+            $page,
+            CommentRepository::PAGINATOR_ITEMS_PER_PAGE
+        );
+    }
+
+    public function getPaginatedListByTask(int $page, Task $task): PaginationInterface
+    {
+        return $this->paginator->paginate(
+            $this->commentRepository->findBy(
+                ['task' => $task]
+            ),
+            $page,
+            CommentRepository::PAGINATOR_ITEMS_PER_PAGE
+        );
+    }
+    public function getPaginatedListByUser(int $page, User $user): PaginationInterface
+    {
+        return $this->paginator->paginate(
+            $this->commentRepository->findBy(
+                ['user' => $user]
+            ),
             $page,
             CommentRepository::PAGINATOR_ITEMS_PER_PAGE
         );
