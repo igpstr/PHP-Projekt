@@ -9,8 +9,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\Security;
 
 class SecurityController extends AbstractController
 {
@@ -66,6 +68,38 @@ class SecurityController extends AbstractController
         }
 
         return $this->render('security/register.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/account", name="app_account")
+     */
+    #[Route(path: '/account', name: 'app_account')]
+    public function changeAccountData(Request $request, UserPasswordHasherInterface $passwordHasher, Security $security): Response
+    {
+        // Get the currently logged-in user
+        /** @var PasswordAuthenticatedUserInterface $user */
+        $user = $security->getUser();
+
+        $form = $this->createForm(UserType::class, $user);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Hash the password before storing it in the database
+            $hashedPassword = $passwordHasher->hashPassword($user, $user->getPassword());
+            $user->setPassword($hashedPassword);
+
+            // Save the updated user to the database
+            $entityManager = $this->managerRegistry->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            // Redirect to the appropriate page after successful update
+            return $this->redirectToRoute('index');
+        }
+
+        return $this->render('security/account.html.twig', [
             'form' => $form->createView(),
         ]);
     }

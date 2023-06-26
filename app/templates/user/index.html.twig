@@ -20,6 +20,7 @@
             <thead>
             <tr>
                 <th>{{ knp_pagination_sortable(pagination, 'Id'|trans, 'user.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Nick'|trans, 'user.nick') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'Email'|trans, 'user.email') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'Roles'|trans, 'user.roles') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'Password'|trans, 'user.password') }}</th>
@@ -30,6 +31,14 @@
             {% for user in pagination.items %}
                 <tr>
                     <td>{{ user.id }}</td>
+                    <td>
+                        {% if user.nick is not null %}
+                            {{ dump(user.nick) }}
+                            {{ user.nick }}
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </td>
                     <td>{{ user.email }}</td>
                     <td>{{ user.roles|join(', ') }}</td>
                     <td>{{ user.password }}</td>

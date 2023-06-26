@@ -12,7 +12,7 @@
     {% endblock %}
 </head>
 <body>
-<header style="background-color: lightgray; position: fixed; top: 0; left: 0; width: 100%;" class="header">
+<header style="background-color: #d8e7f6; position: fixed; top: 0; left: 0; width: 100%;" class="header">
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light justify-content-between flex-column-reverse flex-xxl-row">
             <div class="d-flex navbar-container">
@@ -47,6 +47,7 @@
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <div>
                             {{ app.user.email }}
+                            <a href="{{ url('app_account') }}" class="btn btn-outline-dark">{{ 'My Account'|trans }}</a>
                             <a href="{{ url('app_logout') }}" class="btn btn-dark">{{ 'Logout'|trans }}</a>
                         </div>
                     {% else %}

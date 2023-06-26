@@ -38,6 +38,7 @@ class UserFixtures extends AbstractBaseFixtures
 
         $this->createMany(10, 'users', function (int $i) {
             $user = new User();
+            $user->setNick($this->faker->userName);
             $user->setEmail(sprintf('user%d@example.com', $i));
             $user->setRoles([UserRole::ROLE_USER->value]);
             $user->setPassword(
@@ -52,6 +53,7 @@ class UserFixtures extends AbstractBaseFixtures
 
         $this->createMany(3, 'admins', function (int $i) {
             $user = new User();
+            $user->setNick($this->faker->userName);
             $user->setEmail(sprintf('admin%d@example.com', $i));
             $user->setRoles([UserRole::ROLE_USER->value, UserRole::ROLE_ADMIN->value]);
             $user->setPassword(

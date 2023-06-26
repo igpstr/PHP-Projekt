@@ -31,6 +31,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     /**
+     * Nick.
+     *
+     * @var string|null
+     */
+    #[ORM\Column(type: 'string', length: 180, unique: true)]
+    #[Assert\NotNull]
+    #[Assert\Nick]
+    //private ?string $nick;
+    private ?string $nick = 'sads';
+
+    /**
      * Email.
      *
      * @var string|null
@@ -60,6 +71,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
     private ?Avatar $avatar = null;
 
+//    /**
+//     * User constructor.
+//     */
+//    public function __construct()
+//    {
+//        $this->nick = new String_(); // Initialize the $nick property with an empty string
+//    }
+
     /**
      * Getter for id.
      *
@@ -68,6 +87,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * Getter for nick.
+     *
+     * @return string|null Nick
+     */
+    public function getNick(): ?string
+    {
+        return $this->nick;
+    }
+
+    /**
+     * Setter for nick.
+     *
+     * @param string|null $nick Nick
+     */
+    public function setNick(?string $nick): void
+    {
+        $this->nick = $nick;
     }
 
     /**
