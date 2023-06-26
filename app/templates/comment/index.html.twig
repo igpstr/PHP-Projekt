@@ -24,6 +24,7 @@
                 <th>{{ knp_pagination_sortable(pagination, 'Created at'|trans, 'comment.createdAt') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'Updated at'|trans, 'comment.updatedAt') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'Title'|trans, 'comment.title') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Author'|trans, 'comment.author') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'Task'|trans, 'task.title') }}</th>
                 <th>{{ 'Actions'|trans }}</th>
             </tr>
@@ -35,6 +36,7 @@
                     <td>{{ comment.createdAt|format_date('long') }}</td>
                     <td>{{ comment.updatedAt|format_date('long') }}</td>
                     <td>{{ comment.title }}</td>
+                    <td>{{ comment.author }}</td>
                     <td>
                         <a class="btn btn-outline-info" href="{{ url('task_show', {id: comment.task.id}) }}">{{ comment.task.title }}</a>
                     </td>

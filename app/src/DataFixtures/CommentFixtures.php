@@ -47,10 +47,8 @@ class CommentFixtures extends AbstractBaseFixtures implements DependentFixtureIn
             $task = $this->getRandomReference('tasks');
             $comment->setTask($task);
 
-//            $comment->setStatus(CommentStatus::from($this->faker->numberBetween(1, 2)));
-
             /** @var User $author */
-            $author = $this->getRandomReference('users');
+            $author = $this->getRandomUserReference('users');
             $comment->setAuthor($author);
 
             return $comment;
@@ -70,5 +68,12 @@ class CommentFixtures extends AbstractBaseFixtures implements DependentFixtureIn
     public function getDependencies(): array
     {
         return [TaskFixtures::class, TagFixtures::class, UserFixtures::class];
+    }
+    private function getRandomUserReference(): User
+    {
+        $users = $this->manager->getRepository(User::class)->findAll();
+        $randomUser = $this->faker->randomElement($users);
+
+        return $randomUser;
     }
 }

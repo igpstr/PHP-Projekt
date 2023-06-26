@@ -58,23 +58,19 @@
                             {% endfor %}
                         </td>
                         <td>
-{#                            #}{# {% if is_granted('VIEW', task) %} #}
-{#                            <a class="btn btn-outline-primary" href="{{ url('task_show', {id: task.id}) }}" title="{{ 'action.show'|trans }}">#}
-{#                                {{ 'Show'|trans }}#}
-{#                            </a>#}
-{#                            #}{# {% endif %} #}
-{#                            #}{# {% if is_granted('EDIT', task) %} #}
-{#                            {% if is_granted('ROLE_ADMIN') %}#}
-{#                                <a class="btn btn-outline-success" href="{{ url('task_edit', {id: task.id}) }}" title="{{ 'action.edit'|trans }}">#}
-{#                                    {{ 'Edit'|trans }}#}
-{#                                </a>#}
-{#                            {% endif %}#}
-{#                            #}{# {% if is_granted('DELETE', task) %} #}
-{#                            {% if is_granted('ROLE_ADMIN') %}#}
-{#                                <a class="btn btn-outline-danger" href="{{ url('task_delete', {id: task.id}) }}" title="{{ 'action.delete'|trans }}">#}
-{#                                    {{ 'Delete'|trans }}#}
-{#                                </a>#}
-{#                            {% endif %}#}
+                            <a class="btn btn-outline-primary" href="{{ url('task_show', {id: task.id}) }}" title="{{ 'action.show'|trans }}">
+                                {{ 'Show'|trans }}
+                            </a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a class="btn btn-outline-success" href="{{ url('task_edit', {id: task.id}) }}" title="{{ 'action.edit'|trans }}">
+                                    {{ 'Edit'|trans }}
+                                </a>
+                            {% endif %}
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a class="btn btn-outline-danger" href="{{ url('task_delete', {id: task.id}) }}" title="{{ 'action.delete'|trans }}">
+                                    {{ 'Delete'|trans }}
+                                </a>
+                            {% endif %}
                         </td>
                     </tr>
                 {% endfor %}

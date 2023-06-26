@@ -221,6 +221,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
+    public function __toString(): string
+    {
+        return $this->getNick();
+    }
+
     public function getAvatar(): ?Avatar
     {
         return $this->avatar;
