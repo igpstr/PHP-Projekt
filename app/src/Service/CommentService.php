@@ -69,7 +69,7 @@ class CommentService implements CommentServiceInterface
     {
         return $this->paginator->paginate(
             $this->commentRepository->findBy(
-                ['user' => $user]
+                ['author' => $user]
             ),
             $page,
             CommentRepository::PAGINATOR_ITEMS_PER_PAGE

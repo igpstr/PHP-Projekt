@@ -16,6 +16,8 @@
             <dd>{{ comment.updatedAt|format_date('long') }}</dd>
             <dt>{{ 'label.title'|trans }}</dt>
             <dd>{{  comment.title }}</dd>
+            <dt>{{ 'label.author'|trans }}</dt>
+            <dd>{{  comment.author }}</dd>
             <dt>{{ 'label.task'|trans }}</dt>
             <dd><a class="btn btn-outline-info" href="{{ url('task_show', {id: comment.task.id}) }}">{{  comment.task.title }}</a></dd>
         </dl>

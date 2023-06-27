@@ -8,6 +8,8 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\Type\UserType;
 use App\Form\Type\UserEditType;
+use App\Repository\UserRepository;
+use App\Service\CommentService;
 use App\Service\UserServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -72,10 +74,20 @@ class UserController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route('/{id}', name: 'user_show', requirements: ['id' => '[1-9]\d*'], methods: 'GET')]
-    public function show(User $user): Response
+    #[Route(
+        '/{id}',
+        name: 'user_show',
+        requirements: ['id' => '[1-9]\d*'],
+        methods: 'GET',
+    )]
+    public function show(Request $request, CommentService $commentService, UserRepository $userRepository, User $user): Response
     {
-        return $this->render('user/show.html.twig', ['user' => $user]);
+        $pagination = $commentService->getPaginatedListByUser($request->query->getInt('page', 1), $user);
+
+        return $this->render(
+            'user/show.html.twig',
+            ['user' => $user, 'pagination' => $pagination]
+        );
     }
 
     /**

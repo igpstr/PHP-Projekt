@@ -72,7 +72,7 @@
                                 </a>
                             {% endif %}
                             {% if is_granted('ROLE_ADMIN') %}
-                                <a class="btn btn-outline-danger" href="{{ url('comment_delete', {id: task.id}) }}" title="{{ 'action.delete'|trans }}">
+                                <a class="btn btn-outline-danger" href="{{ url('comment_delete', {id: comment.id}) }}" title="{{ 'action.delete'|trans }}">
                                     {{ 'Delete'|trans }}
                                 </a>
                             {% endif %}
