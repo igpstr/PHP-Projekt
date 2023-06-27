@@ -10,7 +10,7 @@ use App\Entity\Task;
 use App\Form\Type\CommentType;
 use App\Service\CommentServiceInterface;
 use App\Entity\User;
-//use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -71,7 +71,7 @@ class CommentController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}', name: 'comment_show', requirements: ['id' => '[1-9]\d*'], methods: 'GET')]
-    #[IsGranted('VIEW', subject: 'comment')]
+//    #[IsGranted('VIEW', subject: 'comment')]
     public function show(Comment $comment): Response
     {
         return $this->render('comment/show.html.twig', ['comment' => $comment]);
@@ -120,13 +120,13 @@ class CommentController extends AbstractController
      * Edit action.
      *
      * @param Request $request HTTP request
-     * @param Comment    $comment    Comment entity
+     * @param Comment $comment Comment entity
      *
      * @return Response HTTP response
      */
     #[Route('/{id}/edit', name: 'comment_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
     #[IsGranted('EDIT', subject: 'comment')]
-    public function edit(Request $request, Comment $comment): Response
+    public function edit(Request $request, Comment $comment, Task $task): Response
     {
         $form = $this->createForm(
             CommentType::class,
@@ -146,7 +146,7 @@ class CommentController extends AbstractController
                 $this->translator->trans('message.edited_successfully')
             );
 
-            return $this->redirectToRoute('comment_index');
+            return $this->redirectToRoute('task_show', ['id' => $comment->getTask()->getId()]);
         }
 
         return $this->render(
@@ -162,13 +162,13 @@ class CommentController extends AbstractController
      * Delete action.
      *
      * @param Request $request HTTP request
-     * @param Comment    $comment    Comment entity
+     * @param Comment $comment Comment entity
      *
      * @return Response HTTP response
      */
     #[Route('/{id}/delete', name: 'comment_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
     #[IsGranted('DELETE', subject: 'comment')]
-    public function delete(Request $request, Comment $comment): Response
+    public function delete(Request $request, Comment $comment, Task $task): Response
     {
         $form = $this->createForm(
             FormType::class,
@@ -188,7 +188,7 @@ class CommentController extends AbstractController
                 $this->translator->trans('message.deleted_successfully')
             );
 
-            return $this->redirectToRoute('comment_index');
+            return $this->redirectToRoute('task_show', ['id' => $comment->getTask()->getId()]);
         }
 
         return $this->render(

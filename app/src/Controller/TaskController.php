@@ -79,6 +79,7 @@ class TaskController extends AbstractController
         requirements: ['id' => '[1-9]\d*'],
         methods: 'GET',
     )]
+    //#[IsGranted('VIEW', subject: 'task')]
     public function show(Request $request, CommentService $commentService, TaskRepository $taskRepository, Task $task): Response
     {
         $pagination = $commentService->getPaginatedListByTask($request->query->getInt('page', 1), $task);
@@ -136,7 +137,7 @@ class TaskController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}/edit', name: 'task_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
-    #[IsGranted('EDIT', subject: 'task')]
+    //#[IsGranted('EDIT', subject: 'task')]
     public function edit(Request $request, Task $task): Response
     {
         $form = $this->createForm(
@@ -178,7 +179,7 @@ class TaskController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}/delete', name: 'task_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
-    #[IsGranted('DELETE', subject: 'task')]
+    //#[IsGranted('DELETE', subject: 'task')]
     public function delete(Request $request, Task $task): Response
     {
         $form = $this->createForm(

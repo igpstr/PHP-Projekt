@@ -44,23 +44,17 @@
                         <a class="btn btn-outline-info" href="{{ url('task_show', {id: comment.task.id}) }}">{{ comment.task.title }}</a>
                     </td>
                     <td>
-                        {# {% if is_granted('VIEW', comment) %} #}
                             <a class="btn btn-outline-primary" href="{{ url('comment_show', {id: comment.id}) }}" title="{{ 'action.show'|trans }}">
                                 {{ 'Show'|trans }}
                             </a>
-                        {# {% endif %} #}
-                        {# {% if is_granted('EDIT', comment) %} #}
-                        {% if is_granted('ROLE_ADMIN') %}
+                         {% if is_granted('EDIT', comment) %}
                             <a class="btn btn-outline-success" href="{{ url('comment_edit', {id: comment.id}) }}" title="{{ 'action.edit'|trans }}">
                                 {{ 'Edit'|trans }}
                             </a>
                          {% endif %}
-                        {# {% if is_granted('DELETE', comment) %} #}
-                        {% if is_granted('ROLE_ADMIN') %}
                             <a class="btn btn-outline-danger" href="{{ url('comment_delete', {id: comment.id}) }}" title="{{ 'action.delete'|trans }}">
                                 {{ 'Delete'|trans }}
                             </a>
-                         {% endif %}
                     </td>
                 </tr>
             {% endfor %}

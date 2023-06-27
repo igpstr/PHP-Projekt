@@ -1,11 +1,11 @@
 <?php
 /**
- * Task voter.
+ * Comment voter.
  */
 
 namespace App\Security\Voter;
 
-use App\Entity\Task;
+use App\Entity\Comment;
 use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
@@ -13,9 +13,9 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * Class TaskVoter.
+ * Class CommentVoter.
  */
-class TaskVoter extends Voter
+class CommentVoter extends Voter
 {
     /**
      * Edit permission.
@@ -66,7 +66,7 @@ class TaskVoter extends Voter
     protected function supports(string $attribute, $subject): bool
     {
         return in_array($attribute, [self::EDIT, self::VIEW, self::DELETE])
-            && $subject instanceof Task;
+            && $subject instanceof Comment;
     }
 
     /**
@@ -99,41 +99,41 @@ class TaskVoter extends Voter
     }
 
     /**
-     * Checks if user can edit task.
+     * Checks if user can edit comment.
      *
-     * @param Task $task Task entity
+     * @param Comment $comment Comment entity
      * @param UserInterface $user User
      *
      * @return bool Result
      */
-    private function canEdit(Task $task, User $user): bool
+    private function canEdit(Comment $comment, User $user): bool
     {
-        return $task->getAuthor() === $user;
+        return $comment->getAuthor() === $user;
     }
 
     /**
-     * Checks if user can view task.
+     * Checks if user can view comment.
      *
-     * @param Task $task Task entity
+     * @param Comment $comment Comment entity
      * @param UserInterface $user User
      *
      * @return bool Result
      */
-    private function canView(Task $task, User $user): bool
+    private function canView(Comment $comment, User $user): bool
     {
-        return $task->getAuthor() === $user;
+        return $comment->getAuthor() === $user;
     }
 
     /**
-     * Checks if user can delete task.
+     * Checks if user can delete comment.
      *
-     * @param Task $task Task entity
+     * @param Comment $comment Comment entity
      * @param UserInterface $user User
      *
      * @return bool Result
      */
-    private function canDelete(Task $task, User $user): bool
+    private function canDelete(Comment $comment, User $user): bool
     {
-        return $task->getAuthor() === $user;
+        return $comment->getAuthor() === $user;
     }
 }

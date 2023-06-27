@@ -33,6 +33,14 @@
             </a>
         </p>
 
+        {% if is_granted('ROLE_USER') %}
+            <div class="text-center">
+                <a class="btn btn-primary btn-lg" href="{{ url('comment_create', {id: task.id}) }}" title="{{ 'action.create'|trans }}">
+                    {{ 'Comment'|trans }}
+                </a>
+            </div>
+        {% endif %}
+
 
         <h2>{{ 'Comments List'|trans }}</h2>
         {% if pagination is defined and pagination.items|length %}
@@ -70,12 +78,12 @@
                             <a class="btn btn-outline-primary" href="{{ url('comment_show', {id: comment.id}) }}" title="{{ 'action.show'|trans }}">
                                 {{ 'Show'|trans }}
                             </a>
-                            {% if is_granted('ROLE_ADMIN') %}
+                            {% if is_granted('EDIT', comment) %}
                                 <a class="btn btn-outline-success" href="{{ url('comment_edit', {id: comment.id}) }}" title="{{ 'action.edit'|trans }}">
                                     {{ 'Edit'|trans }}
                                 </a>
                             {% endif %}
-                            {% if is_granted('ROLE_ADMIN') %}
+                            {% if is_granted('DELETE', comment) or is_granted('ROLE_ADMIN') %}
                                 <a class="btn btn-outline-danger" href="{{ url('comment_delete', {id: comment.id}) }}" title="{{ 'action.delete'|trans }}">
                                     {{ 'Delete'|trans }}
                                 </a>
@@ -95,10 +103,6 @@
                 {{ 'There are no comments'|trans }}
             </p>
         {% endif %}
-
-        <a class="btn btn-primary btn-lg" href="{{ url('comment_create', {id: task.id}) }}" title="{{ 'action.create'|trans }}">
-            {{ 'Comment'|trans }}
-        </a>
 
     {% else %}
         <p>

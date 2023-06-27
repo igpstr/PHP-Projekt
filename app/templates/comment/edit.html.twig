@@ -1,4 +1,4 @@
-{% if is_granted('ROLE_ADMIN') %}
+{% if is_granted('ROLE_USER') and is_granted('EDIT', comment) %}
     {% include 'default/_form.html.twig' with {
         page_title: 'title.comment_edit'|trans({'%id%': comment.id|default('')}),
         form: form,
@@ -6,13 +6,9 @@
         back_to_list_path: 'comment_index',
     } %}
 {% else %}
-    {% if is_granted('ROLE_USER') %}
-        <p>{{ 'Access denied'|trans }}</p>
-    {% else %}
         {% set loginRoute = path('app_login') %}
         {% set loginRedirect = path(app.request.attributes.get('_route'), app.request.query.all) %}
         <script>
             window.location.href = "{{ loginRoute }}?redirect={{ loginRedirect }}";
         </script>
-    {% endif %}
 {% endif %}
