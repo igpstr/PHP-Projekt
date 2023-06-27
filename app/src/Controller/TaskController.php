@@ -88,15 +88,6 @@ class TaskController extends AbstractController
             ['task' => $task, 'pagination' => $pagination]
         );
     }
-//    public function show(Task $task, CommentRepository $commentRepository): Response
-//    {
-//        $comments = $commentRepository->findCommentsByTask($task)->getQuery()->getResult();
-//
-//        return $this->render('task/show.html.twig', [
-//            'task' => $task,
-//            'comments' => $comments,
-//        ]);
-//    }
 
     /**
      * Create action.

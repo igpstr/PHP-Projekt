@@ -46,7 +46,8 @@
                     <th>{{ knp_pagination_sortable(pagination, 'Created at'|trans, 'comment.createdAt') }}</th>
                     <th>{{ knp_pagination_sortable(pagination, 'Updated at'|trans, 'comment.updatedAt') }}</th>
                     <th>{{ knp_pagination_sortable(pagination, 'Title'|trans, 'comment.title') }}</th>
-                    <th>{{ knp_pagination_sortable(pagination, 'Category'|trans, 'task.title') }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'Author'|trans, 'comment.author') }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'Task'|trans, 'task.title') }}</th>
                     <th>{{ 'Actions'|trans }}</th>
                 </tr>
                 </thead>
@@ -57,27 +58,24 @@
                         <td>{{ comment.createdAt|format_date('long') }}</td>
                         <td>{{ comment.updatedAt|format_date('long') }}</td>
                         <td>{{ comment.title }}</td>
+                        <td>{{ comment.author }}</td>
                         <td>
                             <a class="btn btn-outline-info" href="{{ url('task_show', {id: comment.task.id}) }}">{{ comment.task.title }}</a>
                         </td>
                         <td>
-                            {#                            #}{# {% if is_granted('VIEW', comment) %} #}
-                            {#                            <a class="btn btn-outline-primary" href="{{ url('comment_show', {id: comment.id}) }}" title="{{ 'action.show'|trans }}">#}
-                            {#                                {{ 'Show'|trans }}#}
-                            {#                            </a>#}
-                            {#                            #}{# {% endif %} #}
-                            {#                            #}{# {% if is_granted('EDIT', comment) %} #}
-                            {#                            {% if is_granted('ROLE_ADMIN') %}#}
-                            {#                                <a class="btn btn-outline-success" href="{{ url('comment_edit', {id: comment.id}) }}" title="{{ 'action.edit'|trans }}">#}
-                            {#                                    {{ 'Edit'|trans }}#}
-                            {#                                </a>#}
-                            {#                            {% endif %}#}
-                            {#                            #}{# {% if is_granted('DELETE', comment) %} #}
-                            {#                            {% if is_granted('ROLE_ADMIN') %}#}
-                            {#                                <a class="btn btn-outline-danger" href="{{ url('comment_delete', {id: task.id}) }}" title="{{ 'action.delete'|trans }}">#}
-                            {#                                    {{ 'Delete'|trans }}#}
-                            {#                                </a>#}
-                            {#                            {% endif %}#}
+                            <a class="btn btn-outline-primary" href="{{ url('comment_show', {id: comment.id}) }}" title="{{ 'action.show'|trans }}">
+                                {{ 'Show'|trans }}
+                            </a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a class="btn btn-outline-success" href="{{ url('comment_edit', {id: comment.id}) }}" title="{{ 'action.edit'|trans }}">
+                                    {{ 'Edit'|trans }}
+                                </a>
+                            {% endif %}
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a class="btn btn-outline-danger" href="{{ url('comment_delete', {id: task.id}) }}" title="{{ 'action.delete'|trans }}">
+                                    {{ 'Delete'|trans }}
+                                </a>
+                            {% endif %}
                         </td>
                     </tr>
                 {% endfor %}
