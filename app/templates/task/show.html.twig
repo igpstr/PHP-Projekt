@@ -58,9 +58,11 @@
                         <td>{{ comment.createdAt|format_date('long') }}</td>
                         <td>{{ comment.updatedAt|format_date('long') }}</td>
                         <td>{{ comment.title }}</td>
-                        <td>{{ comment.author }}</td>
                         <td>
-                            <a class="btn btn-outline-info" href="{{ url('task_show', {id: comment.task.id}) }}">{{ comment.task.title }}</a>
+                            <a class="btn btn-outline-secondary" href="{{ url('user_show', {id: comment.author.id}) }}">{{ comment.author }}</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-outline-success" href="{{ url('task_show', {id: comment.task.id}) }}">{{ comment.task.title }}</a>
                         </td>
                         <td>
                             <a class="btn btn-outline-primary" href="{{ url('comment_show', {id: comment.id}) }}" title="{{ 'action.show'|trans }}">

@@ -15,11 +15,15 @@
             <dt>{{ 'label.updated_at'|trans }}</dt>
             <dd>{{ comment.updatedAt|format_date('long') }}</dd>
             <dt>{{ 'label.title'|trans }}</dt>
-            <dd>{{  comment.title }}</dd>
+            <dd>{{ comment.title }}</dd>
             <dt>{{ 'label.author'|trans }}</dt>
-            <dd>{{  comment.author }}</dd>
+            <dd>
+                <a class="btn btn-outline-secondary" href="{{ url('user_show', {id: comment.author.id}) }}">{{ comment.author }}</a>
+            </dd>
             <dt>{{ 'label.task'|trans }}</dt>
-            <dd><a class="btn btn-outline-info" href="{{ url('task_show', {id: comment.task.id}) }}">{{  comment.task.title }}</a></dd>
+            <dd>
+                <a class="btn btn-outline-success" href="{{ url('task_show', {id: comment.task.id}) }}">{{ comment.task.title }}</a>
+            </dd>
         </dl>
         <p>
             <a href="{{ url('comment_index') }}" title="{{ 'action.back_to_list'|trans }}">
