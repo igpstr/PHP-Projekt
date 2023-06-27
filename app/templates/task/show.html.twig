@@ -92,9 +92,13 @@
 
         {% else %}
             <p>
-                {{ 'message.empty_list'|trans }}
+                {{ 'There are no comments'|trans }}
             </p>
         {% endif %}
+
+        <a class="btn btn-primary btn-lg" href="{{ url('comment_create', {id: task.id}) }}" title="{{ 'action.create'|trans }}">
+            {{ 'Comment'|trans }}
+        </a>
 
     {% else %}
         <p>

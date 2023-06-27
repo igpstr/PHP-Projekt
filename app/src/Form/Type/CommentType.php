@@ -40,19 +40,6 @@ class CommentType extends AbstractType
                 'required' => true,
                 'attr' => ['max_length' => 255],
             ]);
-        $builder->add(
-            'task',
-            EntityType::class,
-            [
-                'class' => Task::class,
-                'choice_label' => function ($task): string {
-                    return $task->getTitle();
-                },
-                'label' => 'label.task',
-                'placeholder' => 'label.none',
-                'required' => true,
-            ]
-        );
     }
 
     /**

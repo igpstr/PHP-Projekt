@@ -6,6 +6,7 @@
 namespace App\Controller;
 
 use App\Entity\Comment;
+use App\Entity\Task;
 use App\Form\Type\CommentType;
 use App\Service\CommentServiceInterface;
 use App\Entity\User;
@@ -83,17 +84,18 @@ class CommentController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route('/create', name: 'comment_create', methods: 'GET|POST')]
-    public function create(Request $request): Response
+    #[Route('/create/{id}', name: 'comment_create', methods: 'GET|POST')]
+    public function create(Request $request, Task $task): Response
     {
         /** @var User $user */
         $user = $this->getUser();
         $comment = new Comment();
         $comment->setAuthor($user);
+        $comment->setTask($task);
         $form = $this->createForm(
             CommentType::class,
             $comment,
-            ['action' => $this->generateUrl('comment_create')]
+            ['action' => $this->generateUrl('comment_create', ['id' => $task->getId()])]
         );
         $form->handleRequest($request);
 
@@ -105,7 +107,7 @@ class CommentController extends AbstractController
                 $this->translator->trans('message.created_successfully')
             );
 
-            return $this->redirectToRoute('comment_index');
+            return $this->redirectToRoute('task_show', ['id' => $task->getId()]);
         }
 
         return $this->render(
