@@ -58,6 +58,14 @@ class TaskType extends AbstractType
                 'attr' => ['max_length' => 255],
             ]);
         $builder->add(
+            'content',
+            TextType::class,
+            [
+                'label' => 'label.content',
+                'required' => true,
+                //'attr' => ['max_length' => 255],
+            ]);
+        $builder->add(
             'category',
             EntityType::class,
             [

@@ -63,6 +63,15 @@ class Task
     private ?string $title;
 
     /**
+     * Content.
+     *
+     * @var string|null
+     */
+    #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank]
+    private ?string $content;
+
+    /**
      * Category.
      *
      * @var Category
@@ -173,6 +182,26 @@ class Task
     public function setTitle(string $title): void
     {
         $this->title = $title;
+    }
+
+    /**
+     * Getter for content.
+     *
+     * @return string|null Content
+     */
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    /**
+     * Setter for content.
+     *
+     * @param string $content Content
+     */
+    public function setContent(string $content): void
+    {
+        $this->content = $content;
     }
 
     /**
