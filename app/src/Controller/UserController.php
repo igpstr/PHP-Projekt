@@ -40,8 +40,9 @@ class UserController extends AbstractController
     /**
      * Constructor.
      *
-     * @param UserServiceInterface $userService User service
-     * @param TranslatorInterface  $translator  Translator
+     * @param UserServiceInterface        $userService    User service
+     * @param TranslatorInterface         $translator     Translator
+     * @param UserPasswordHasherInterface $passwordHasher
      */
     public function __construct(UserServiceInterface $userService, TranslatorInterface $translator, UserPasswordHasherInterface $passwordHasher)
     {
@@ -70,16 +71,14 @@ class UserController extends AbstractController
     /**
      * Show action.
      *
-     * @param User $user User entity
+     * @param User           $user           User entity
+     * @param Request        $request        HTTP request
+     * @param CommentService $commentService CommentService
+     * @param UserRepository $userRepository UserRepository
      *
      * @return Response HTTP response
      */
-    #[Route(
-        '/{id}',
-        name: 'user_show',
-        requirements: ['id' => '[1-9]\d*'],
-        methods: 'GET',
-    )]
+    #[Route('/{id}', name: 'user_show', requirements: ['id' => '[1-9]\d*'], methods: 'GET',)]
     public function show(Request $request, CommentService $commentService, UserRepository $userRepository, User $user): Response
     {
         $pagination = $commentService->getPaginatedListByUser($request->query->getInt('page', 1), $user);
@@ -109,11 +108,11 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //$user->setRoles(['ROLE_USER']);
+            // $user->setRoles(['ROLE_USER']);
             $user->setPassword(
                 $this->passwordHasher->hashPassword(
                     $user,
-                    $form["password"]->getData()
+                    $form['password']->getData()
                 )
             );
             $this->userService->save($user);
@@ -126,7 +125,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('user_index');
         }
 
-        return $this->render('user/create.html.twig',  ['form' => $form->createView()]);
+        return $this->render('user/create.html.twig', ['form' => $form->createView()]);
     }
 
     /**
@@ -154,7 +153,7 @@ class UserController extends AbstractController
             $user->setPassword(
                 $this->passwordHasher->hashPassword(
                     $user,
-                    $form["password"]->getData()
+                    $form['password']->getData()
                 )
             );
             $this->userService->save($user);

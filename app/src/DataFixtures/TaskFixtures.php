@@ -10,7 +10,6 @@ use App\Entity\Enum\TaskStatus;
 use App\Entity\Tag;
 use App\Entity\Task;
 use App\Entity\User;
-use DateTimeImmutable;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 /**
@@ -36,12 +35,12 @@ class TaskFixtures extends AbstractBaseFixtures implements DependentFixtureInter
             $task->setTitle($this->faker->sentence);
             $task->setContent($this->faker->text(1500));
             $task->setCreatedAt(
-                DateTimeImmutable::createFromMutable(
+                \DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-100 days', '-1 days')
                 )
             );
             $task->setUpdatedAt(
-                DateTimeImmutable::createFromMutable(
+                \DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-100 days', '-1 days')
                 )
             );
@@ -58,7 +57,7 @@ class TaskFixtures extends AbstractBaseFixtures implements DependentFixtureInter
                 $task->addTag($tag);
             }
 
-//            $task->setStatus(TaskStatus::from($this->faker->numberBetween(1, 2)));
+            //            $task->setStatus(TaskStatus::from($this->faker->numberBetween(1, 2)));
 
             /** @var User $author */
             $author = $this->getRandomReference('users');

@@ -6,10 +6,8 @@
 namespace App\DataFixtures;
 
 use App\Entity\Task;
-use App\Entity\Tag;
 use App\Entity\Comment;
 use App\Entity\User;
-use DateTimeImmutable;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 /**
@@ -34,12 +32,12 @@ class CommentFixtures extends AbstractBaseFixtures implements DependentFixtureIn
             $comment = new Comment();
             $comment->setTitle($this->faker->sentence);
             $comment->setCreatedAt(
-                DateTimeImmutable::createFromMutable(
+                \DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-100 days', '-1 days')
                 )
             );
             $comment->setUpdatedAt(
-                DateTimeImmutable::createFromMutable(
+                \DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-100 days', '-1 days')
                 )
             );
@@ -69,6 +67,10 @@ class CommentFixtures extends AbstractBaseFixtures implements DependentFixtureIn
     {
         return [TaskFixtures::class, TagFixtures::class, UserFixtures::class];
     }
+
+    /**
+     * @return User
+     */
     private function getRandomUserReference(): User
     {
         $users = $this->manager->getRepository(User::class)->findAll();

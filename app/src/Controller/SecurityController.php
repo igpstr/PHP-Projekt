@@ -1,4 +1,7 @@
 <?php
+/**
+ * Security controller.
+ */
 
 namespace App\Controller;
 
@@ -15,14 +18,29 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+/**
+ * Class SecurityController.
+ */
 class SecurityController extends AbstractController
 {
+    /**
+     * @param ManagerRegistry $managerRegistry
+     */
     private ManagerRegistry $managerRegistry;
 
+    /**
+     * @param ManagerRegistry $managerRegistry
+     */
     public function __construct(ManagerRegistry $managerRegistry)
     {
         $this->managerRegistry = $managerRegistry;
     }
+
+    /**
+     * @param AuthenticationUtils $authenticationUtils
+     *
+     * @return Response
+     */
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -38,6 +56,9 @@ class SecurityController extends AbstractController
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
+    /**
+     * @return void
+     */
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
     {
@@ -46,6 +67,12 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/register", name="app_register")
+     *
+     * @param Request                     $request
+     * @param UserPasswordHasherInterface $passwordHasher
+     *
+     * @return Response
+     *
      */
     #[Route(path: '/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $passwordHasher): Response
@@ -73,8 +100,15 @@ class SecurityController extends AbstractController
         ]);
     }
 
+
     /**
      * @Route("/account", name="app_account")
+     *
+     * @param Request                     $request
+     * @param UserPasswordHasherInterface $passwordHasher
+     * @param Security                    $security
+     *
+     * @return Response
      */
     #[Route(path: '/account', name: 'app_account')]
     public function changeAccountData(Request $request, UserPasswordHasherInterface $passwordHasher, Security $security): Response

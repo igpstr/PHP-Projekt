@@ -9,7 +9,6 @@ use App\Entity\User;
 use App\Repository\UserRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
-use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\NonUniqueResultException;
 
 /**
@@ -86,7 +85,7 @@ class UserService implements UserServiceInterface
     {
         return $this->userRepository->findOneByTitle($title);
     }
-    /**
+    /*
      * Find by id.
      *
      * @param int $id User id

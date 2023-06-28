@@ -38,7 +38,7 @@ class CommentController extends AbstractController
      * Constructor.
      *
      * @param CommentServiceInterface $commentService Comment service
-     * @param TranslatorInterface  $translator  Translator
+     * @param TranslatorInterface     $translator     Translator
      */
     public function __construct(CommentServiceInterface $commentService, TranslatorInterface $translator)
     {
@@ -71,7 +71,6 @@ class CommentController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}', name: 'comment_show', requirements: ['id' => '[1-9]\d*'], methods: 'GET')]
-//    #[IsGranted('VIEW', subject: 'comment')]
     public function show(Comment $comment): Response
     {
         return $this->render('comment/show.html.twig', ['comment' => $comment]);
@@ -81,6 +80,7 @@ class CommentController extends AbstractController
      * Create action.
      *
      * @param Request $request HTTP request
+     * @param Task    $task
      *
      * @return Response HTTP response
      */
@@ -116,13 +116,15 @@ class CommentController extends AbstractController
         );
     }
 
+
     /**
      * Edit action.
      *
-     * @param Request $request HTTP request
-     * @param Comment $comment Comment entity
+     * @param Request $request
+     * @param Comment $comment
+     * @param Task    $task
      *
-     * @return Response HTTP response
+     * @return Response
      */
     #[Route('/{id}/edit', name: 'comment_edit', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
     #[IsGranted('EDIT', subject: 'comment')]
@@ -163,6 +165,7 @@ class CommentController extends AbstractController
      *
      * @param Request $request HTTP request
      * @param Comment $comment Comment entity
+     * @param Task    $task
      *
      * @return Response HTTP response
      */

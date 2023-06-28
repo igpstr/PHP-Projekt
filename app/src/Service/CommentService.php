@@ -30,8 +30,8 @@ class CommentService implements CommentServiceInterface
     /**
      * Constructor.
      *
-     * @param CommentRepository     $commentRepository Comment repository
-     * @param PaginatorInterface $paginator      Paginator
+     * @param CommentRepository  $commentRepository Comment repository
+     * @param PaginatorInterface $paginator         Paginator
      */
     public function __construct(CommentRepository $commentRepository, PaginatorInterface $paginator)
     {
@@ -55,6 +55,12 @@ class CommentService implements CommentServiceInterface
         );
     }
 
+    /**
+     * @param int  $page
+     * @param Task $task
+     *
+     * @return PaginationInterface
+     */
     public function getPaginatedListByTask(int $page, Task $task): PaginationInterface
     {
         return $this->paginator->paginate(
@@ -65,6 +71,13 @@ class CommentService implements CommentServiceInterface
             CommentRepository::PAGINATOR_ITEMS_PER_PAGE
         );
     }
+
+    /**
+     * @param int  $page
+     * @param User $user
+     *
+     * @return PaginationInterface
+     */
     public function getPaginatedListByUser(int $page, User $user): PaginationInterface
     {
         return $this->paginator->paginate(
@@ -95,5 +108,4 @@ class CommentService implements CommentServiceInterface
     {
         $this->commentRepository->delete($comment);
     }
-
 }

@@ -107,21 +107,10 @@ class TaskRepository extends ServiceEntityRepository
     }
 
     /**
-     * Get or create new query builder.
-     *
-     * @param QueryBuilder|null $queryBuilder Query builder
-     *
-     * @return QueryBuilder Query builder
-     */
-    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
-    {
-        return $queryBuilder ?? $this->createQueryBuilder('task');
-    }
-
-    /**
      * Find tasks by category.
      *
      * @param Category $category
+     *
      * @return QueryBuilder
      */
     public function findTasksByCategory(Category $category): QueryBuilder
@@ -134,9 +123,9 @@ class TaskRepository extends ServiceEntityRepository
     /**
      * Find tasks by tag.
      *
-     * @param int $tagId Tag ID
+     * @param Tag $tag
      *
-     * @return Task[] Task entities
+     * @return array
      */
     public function findTasksByTag(Tag $tag): array
     {
@@ -148,4 +137,15 @@ class TaskRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+     * Get or create new query builder.
+     *
+     * @param QueryBuilder|null $queryBuilder Query builder
+     *
+     * @return QueryBuilder Query builder
+     */
+    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
+    {
+        return $queryBuilder ?? $this->createQueryBuilder('task');
+    }
 }

@@ -37,13 +37,13 @@ class RecordController extends AbstractController
         );
     }
 
-// ...
+    // ...
 
     /**
      * Show action.
      *
      * @param RecordRepository $repository Record repository
-     * @param int $id Record id
+     * @param int              $id         Record id
      *
      * @return Response HTTP response
      */
@@ -62,5 +62,5 @@ class RecordController extends AbstractController
             ['record' => $record]
         );
     }
-// ...
+    // ...
 }

@@ -386,14 +386,22 @@
          <source>title.comment_create</source>
          <target>Write a comment</target>
       </trans-unit>
-<!--       <trans-unit id=""> -->
-<!--          <source></source> -->
-<!--          <target></target> -->
-<!--       </trans-unit> -->
-<!--       <trans-unit id=""> -->
-<!--          <source></source> -->
-<!--          <target></target> -->
-<!--       </trans-unit> -->
+      <trans-unit id="message.edited_successfully">
+         <source>message.edited_successfully</source>
+         <target>Message edited successfully!</target>
+      </trans-unit>
+      <trans-unit id="message.deleted_successfully">
+         <source>message.deleted_successfully</source>
+         <target>Message deleted successfully!</target>
+      </trans-unit>
+      <trans-unit id="message.created_successfully">
+         <source>message.created_successfully</source>
+         <target>Message created successfully!</target>
+      </trans-unit>
+      <trans-unit id="message.form_error">
+         <source>message.form_error</source>
+         <target>Error!</target>
+      </trans-unit>
 <!--       <trans-unit id=""> -->
 <!--          <source></source> -->
 <!--          <target></target> -->

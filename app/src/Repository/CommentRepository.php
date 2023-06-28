@@ -6,7 +6,6 @@
 namespace App\Repository;
 
 use App\Entity\Task;
-use App\Entity\Tag;
 use App\Entity\Comment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
@@ -46,9 +45,17 @@ class CommentRepository extends ServiceEntityRepository
         parent::__construct($registry, Comment::class);
     }
 
+    /**
+     * @param array      $criteria
+     * @param array|null $orderBy
+     * @param $limit
+     * @param $offset
+     *
+     * @return array|object[]
+     */
     public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
     {
-        if ($orderBy === null) {
+        if (null === $orderBy) {
             $orderBy = ['updatedAt' => 'DESC'];
         }
 
@@ -115,6 +122,20 @@ class CommentRepository extends ServiceEntityRepository
     }
 
     /**
+     * Find comments by task.
+     *
+     * @param Task $task
+     *
+     * @return QueryBuilder
+     */
+    public function findCommentsByTask(Task $task): QueryBuilder
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.task = :task')
+            ->setParameter('task', $task);
+    }
+
+    /**
      * Get or create new query builder.
      *
      * @param QueryBuilder|null $queryBuilder Query builder
@@ -124,18 +145,5 @@ class CommentRepository extends ServiceEntityRepository
     private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
     {
         return $queryBuilder ?? $this->createQueryBuilder('comment');
-    }
-
-    /**
-     * Find comments by task.
-     *
-     * @param Task $task
-     * @return QueryBuilder
-     */
-    public function findCommentsByTask(Task $task): QueryBuilder
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.task = :task')
-            ->setParameter('task', $task);
     }
 }

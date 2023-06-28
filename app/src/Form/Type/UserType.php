@@ -5,14 +5,10 @@
 
 namespace App\Form\Type;
 
-use App\Entity\Category;
 use App\Entity\Enum\UserRole;
 use App\Entity\User;
-//use App\Form\DataTransformer\UserDataTransformer;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,24 +21,11 @@ use Symfony\Component\Form\FormEvents;
  */
 class UserType extends AbstractType
 {
-//    /**
-//     * User data transformer.
-//     *
-//     * @var UserDataTransformer
-//     */
-//    private UserDataTransformer $tagsDataTransformer;
-//
-//    /**
-//     * Constructor.
-//     *
-//     * @param UserDataTransformer $tagsDataTransformer User data transformer
-//     */
-//    public function __construct(UserDataTransformer $tagsDataTransformer)
-//    {
-//        $this->tagsDataTransformer = $tagsDataTransformer;
-//    }
     private AuthorizationCheckerInterface $authorizationChecker;
 
+    /**
+     * @param AuthorizationCheckerInterface $authorizationChecker
+     */
     public function __construct(AuthorizationCheckerInterface $authorizationChecker)
     {
         $this->authorizationChecker = $authorizationChecker;
@@ -68,7 +51,8 @@ class UserType extends AbstractType
                 'label' => 'label.nick',
                 'required' => true,
                 'attr' => ['max_length' => 255],
-            ]);
+            ]
+        );
         $builder->add(
             'email',
             TextType::class,
@@ -76,23 +60,23 @@ class UserType extends AbstractType
                 'label' => 'label.email',
                 'required' => true,
                 'attr' => ['max_length' => 255],
-            ]);
-        if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
-        $builder->add(
-            'roles',
-            ChoiceType::class,
-            [
-                'label' => 'Roles',
-                'choices' => [
-                    'User' => 'ROLE_USER',
-                    'Admin' => 'ROLE_ADMIN',
-                ],
-                'multiple' => true,
-                'required' => true,
             ]
         );
-        }
-        else {
+        if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
+            $builder->add(
+                'roles',
+                ChoiceType::class,
+                [
+                    'label' => 'Roles',
+                    'choices' => [
+                        'User' => 'ROLE_USER',
+                        'Admin' => 'ROLE_ADMIN',
+                    ],
+                    'multiple' => true,
+                    'required' => true,
+                ]
+            );
+        } else {
             // Set the role to ROLE_USER for non-admin users
             $builder->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
                 $user = $event->getData();
@@ -109,9 +93,9 @@ class UserType extends AbstractType
             ]
         );
 
-//        $builder->get('tags')->addModelTransformer(
-//            $this->tagsDataTransformer
-//        );
+        //        $builder->get('tags')->addModelTransformer(
+        //            $this->tagsDataTransformer
+        //        );
     }
 
     /**

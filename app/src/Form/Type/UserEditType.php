@@ -5,11 +5,8 @@
 
 namespace App\Form\Type;
 
-use App\Entity\Category;
-use App\Entity\Enum\UserRole;
 use App\Entity\User;
-//use App\Form\DataTransformer\UserDataTransformer;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+// use App\Form\DataTransformer\UserDataTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -26,25 +23,13 @@ use Symfony\Component\Form\FormEvents;
  */
 class UserEditType extends AbstractType
 {
-//    /**
-//     * User data transformer.
-//     *
-//     * @var UserDataTransformer
-//     */
-//    private UserDataTransformer $tagsDataTransformer;
-//
-//    /**
-//     * Constructor.
-//     *
-//     * @param UserDataTransformer $tagsDataTransformer User data transformer
-//     */
-//    public function __construct(UserDataTransformer $tagsDataTransformer)
-//    {
-//        $this->tagsDataTransformer = $tagsDataTransformer;
-//    }
     private AuthorizationCheckerInterface $authorizationChecker;
     private UserPasswordHasherInterface $passwordHasher;
 
+    /**
+     * @param UserPasswordHasherInterface   $passwordHasher
+     * @param AuthorizationCheckerInterface $authorizationChecker
+     */
     public function __construct(UserPasswordHasherInterface $passwordHasher, AuthorizationCheckerInterface $authorizationChecker)
     {
         $this->passwordHasher = $passwordHasher;
@@ -71,7 +56,8 @@ class UserEditType extends AbstractType
                 'label' => 'label.nick',
                 'required' => true,
                 'attr' => ['max_length' => 255],
-            ]);
+            ]
+        );
         if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
             $builder->add(
                 'roles',
@@ -85,7 +71,8 @@ class UserEditType extends AbstractType
                     'multiple' => true,
                     'required' => true,
                 ]
-            );}
+            );
+        }
         $builder->add(
             'password',
             PasswordType::class,
@@ -93,19 +80,20 @@ class UserEditType extends AbstractType
                 'label' => 'label.password',
                 'required' => true,
                 'attr' => ['max_length' => 64],
-            ]);
+            ]
+        );
         $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
-                $form = $event->getForm();
-                $user = $event->getData();
+            $form = $event->getForm();
+            $user = $event->getData();
 
-                // Hash the password
-                $hashedPassword = $this->passwordHasher->hashPassword($user, $user->getPassword());
+            // Hash the password
+            $hashedPassword = $this->passwordHasher->hashPassword($user, $user->getPassword());
 
-                // Set the hashed password
-                $user->setPassword($hashedPassword);
+            // Set the hashed password
+            $user->setPassword($hashedPassword);
 
-                $event->setData($user);
-            });
+            $event->setData($user);
+        });
     }
 
     /**

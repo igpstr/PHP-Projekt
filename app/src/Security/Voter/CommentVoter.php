@@ -39,13 +39,6 @@ class CommentVoter extends Voter
     public const DELETE = 'DELETE';
 
     /**
-     * Security helper.
-     *
-     * @var Security
-     */
-    private Security $security;
-
-    /**
      * OrderVoter constructor.
      *
      * @param Security $security Security helper
@@ -101,8 +94,8 @@ class CommentVoter extends Voter
     /**
      * Checks if user can edit comment.
      *
-     * @param Comment $comment Comment entity
-     * @param UserInterface $user User
+     * @param Comment       $comment Comment entity
+     * @param UserInterface $user    User
      *
      * @return bool Result
      */
@@ -114,8 +107,8 @@ class CommentVoter extends Voter
     /**
      * Checks if user can view comment.
      *
-     * @param Comment $comment Comment entity
-     * @param UserInterface $user User
+     * @param Comment       $comment Comment entity
+     * @param UserInterface $user    User
      *
      * @return bool Result
      */
@@ -127,8 +120,8 @@ class CommentVoter extends Voter
     /**
      * Checks if user can delete comment.
      *
-     * @param Comment $comment Comment entity
-     * @param UserInterface $user User
+     * @param Comment       $comment Comment entity
+     * @param UserInterface $user    User
      *
      * @return bool Result
      */

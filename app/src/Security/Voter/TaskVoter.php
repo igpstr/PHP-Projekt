@@ -40,8 +40,6 @@ class TaskVoter extends Voter
 
     /**
      * Security helper.
-     *
-     * @var Security
      */
     private Security $security;
 
@@ -101,7 +99,7 @@ class TaskVoter extends Voter
     /**
      * Checks if user can edit task.
      *
-     * @param Task $task Task entity
+     * @param Task          $task Task entity
      * @param UserInterface $user User
      *
      * @return bool Result
@@ -114,7 +112,7 @@ class TaskVoter extends Voter
     /**
      * Checks if user can view task.
      *
-     * @param Task $task Task entity
+     * @param Task          $task Task entity
      * @param UserInterface $user User
      *
      * @return bool Result
@@ -127,7 +125,7 @@ class TaskVoter extends Voter
     /**
      * Checks if user can delete task.
      *
-     * @param Task $task Task entity
+     * @param Task          $task Task entity
      * @param UserInterface $user User
      *
      * @return bool Result

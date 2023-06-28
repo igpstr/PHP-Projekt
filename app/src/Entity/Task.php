@@ -23,8 +23,6 @@ class Task
 {
     /**
      * Primary key.
-     *
-     * @var int|null
      */
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -33,28 +31,22 @@ class Task
 
     /**
      * Created at.
-     *
-     * @var DateTimeImmutable|null
      */
     #[ORM\Column(type: 'datetime_immutable')]
-    #[Assert\Type(DateTimeImmutable::class)]
+    #[Assert\Type(\DateTimeImmutable::class)]
     #[Gedmo\Timestampable(on: 'create')]
-    private ?DateTimeImmutable $createdAt;
+    private ?\DateTimeImmutable $createdAt;
 
     /**
      * Updated at.
-     *
-     * @var DateTimeImmutable|null
      */
     #[ORM\Column(type: 'datetime_immutable')]
-    #[Assert\Type(DateTimeImmutable::class)]
+    #[Assert\Type(\DateTimeImmutable::class)]
     #[Gedmo\Timestampable(on: 'update')]
-    private ?DateTimeImmutable $updatedAt;
+    private ?\DateTimeImmutable $updatedAt;
 
     /**
      * Title.
-     *
-     * @var string|null
      */
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\Type('string')]
@@ -64,8 +56,6 @@ class Task
 
     /**
      * Content.
-     *
-     * @var string|null
      */
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\NotBlank]
@@ -94,8 +84,6 @@ class Task
 
     /**
      * Author.
-     *
-     * @var User|null
      */
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EXTRA_LAZY')]
     #[ORM\JoinColumn(nullable: false)]
@@ -127,9 +115,9 @@ class Task
     /**
      * Getter for created at.
      *
-     * @return DateTimeImmutable|null Created at
+     * @return \DateTimeImmutable|null Created at
      */
-    public function getCreatedAt(): ?DateTimeImmutable
+    public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
     }
@@ -137,9 +125,9 @@ class Task
     /**
      * Setter for created at.
      *
-     * @param DateTimeImmutable $createdAt Created at
+     * @param \DateTimeImmutable $createdAt Created at
      */
-    public function setCreatedAt(DateTimeImmutable $createdAt): void
+    public function setCreatedAt(\DateTimeImmutable $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
@@ -147,9 +135,9 @@ class Task
     /**
      * Getter for updated at.
      *
-     * @return DateTimeImmutable|null Updated at
+     * @return \DateTimeImmutable|null Updated at
      */
-    public function getUpdatedAt(): ?DateTimeImmutable
+    public function getUpdatedAt(): ?\DateTimeImmutable
     {
         return $this->updatedAt;
     }
@@ -157,9 +145,9 @@ class Task
     /**
      * Setter for updated at.
      *
-     * @param DateTimeImmutable $updatedAt Updated at
+     * @param \DateTimeImmutable $updatedAt Updated at
      */
-    public function setUpdatedAt(DateTimeImmutable $updatedAt): void
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }
@@ -244,7 +232,6 @@ class Task
         $this->tags = $tags;
     }
 
-
     /**
      * Add tag.
      *
@@ -267,11 +254,19 @@ class Task
         $this->tags->removeElement($tag);
     }
 
+    /**
+     * @return User|null
+     */
     public function getAuthor(): ?User
     {
         return $this->author;
     }
 
+    /**
+     * @param User|null $author
+     *
+     * @return $this
+     */
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
@@ -279,11 +274,19 @@ class Task
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getComment(): ?string
     {
         return $this->comment;
     }
 
+    /**
+     * @param string|null $comment
+     *
+     * @return $this
+     */
     public function setComment(?string $comment): self
     {
         $this->comment = $comment;

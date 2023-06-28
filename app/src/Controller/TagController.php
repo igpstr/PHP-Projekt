@@ -5,7 +5,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Category;
 use App\Entity\Tag;
 use App\Form\Type\TagType;
 use App\Repository\TaskRepository;
@@ -38,7 +37,7 @@ class TagController extends AbstractController
      * Constructor.
      *
      * @param TagServiceInterface $tagService Tag service
-     * @param TranslatorInterface  $translator  Translator
+     * @param TranslatorInterface $translator Translator
      */
     public function __construct(TagServiceInterface $tagService, TranslatorInterface $translator)
     {
@@ -66,25 +65,16 @@ class TagController extends AbstractController
     /**
      * Show action.
      *
-     * @param Tag           $tag        Tag
-     * @param TaskRepository     $taskRepository  Task repository
-     * @param PaginatorInterface $paginator       Paginator
-     * @param Request            $request         HTTP request
+     * @param Tag                $tag            Tag
+     * @param TaskRepository     $taskRepository Task repository
+     * @param PaginatorInterface $paginator      Paginator
+     * @param Request            $request        HTTP request
      *
      * @return Response HTTP response
      */
-    #[Route(
-        '/{id}',
-        name: 'tag_show',
-        requirements: ['id' => '[1-9]\d*'],
-        methods: 'GET'
-    )]
-    public function show(
-        Tag $tag,
-        TaskRepository $taskRepository,
-        PaginatorInterface $paginator,
-        Request $request
-    ): Response {
+    #[Route('/{id}', name: 'tag_show', requirements: ['id' => '[1-9]\d*'], methods: 'GET')]
+    public function show(Tag $tag, TaskRepository $taskRepository, PaginatorInterface $paginator, Request $request): Response
+    {
         $tasksQuery = $taskRepository->findTasksByTag($tag);
 
         $pagination = $paginator->paginate(
@@ -106,7 +96,7 @@ class TagController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route('/create', name: 'tag_create', methods: 'GET|POST', )]
+    #[Route('/create', name: 'tag_create', methods: 'GET|POST')]
     public function create(Request $request): Response
     {
         $tag = new Tag();
@@ -128,14 +118,14 @@ class TagController extends AbstractController
             return $this->redirectToRoute('tag_index');
         }
 
-        return $this->render('tag/create.html.twig',  ['form' => $form->createView()]);
+        return $this->render('tag/create.html.twig', ['form' => $form->createView()]);
     }
 
     /**
      * Edit action.
      *
      * @param Request $request HTTP request
-     * @param Tag    $tag    Tag entity
+     * @param Tag     $tag     Tag entity
      *
      * @return Response HTTP response
      */
@@ -176,7 +166,7 @@ class TagController extends AbstractController
      * Delete action.
      *
      * @param Request $request HTTP request
-     * @param Tag    $tag    Tag entity
+     * @param Tag     $tag     Tag entity
      *
      * @return Response HTTP response
      */

@@ -21,8 +21,6 @@ class TaskType extends AbstractType
 {
     /**
      * Tags data transformer.
-     *
-     * @var TagsDataTransformer
      */
     private TagsDataTransformer $tagsDataTransformer;
 
@@ -56,15 +54,17 @@ class TaskType extends AbstractType
                 'label' => 'label.title',
                 'required' => true,
                 'attr' => ['max_length' => 255],
-            ]);
+            ]
+        );
         $builder->add(
             'content',
             TextType::class,
             [
                 'label' => 'label.content',
                 'required' => true,
-                //'attr' => ['max_length' => 255],
-            ]);
+                // 'attr' => ['max_length' => 255],
+            ]
+        );
         $builder->add(
             'category',
             EntityType::class,

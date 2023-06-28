@@ -97,5 +97,4 @@ class AvatarController extends AbstractController
             ['form' => $form->createView()]
         );
     }
-
 }

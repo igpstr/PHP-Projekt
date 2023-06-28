@@ -30,8 +30,6 @@ class CategoryController extends AbstractController
 
     /**
      * Translator.
-     *
-     * @var TranslatorInterface
      */
     private TranslatorInterface $translator;
 
@@ -67,25 +65,15 @@ class CategoryController extends AbstractController
     /**
      * Show action.
      *
-     * @param Category           $category        Category
-     * @param TaskRepository     $taskRepository  Task repository
-     * @param PaginatorInterface $paginator       Paginator
-     * @param Request            $request         HTTP request
+     * @param Category           $category       Category
+     * @param TaskRepository     $taskRepository Task repository
+     * @param PaginatorInterface $paginator      Paginator
+     * @param Request            $request        HTTP request
      *
      * @return Response HTTP response
      */
-    #[Route(
-        '/{id}',
-        name: 'category_show',
-        requirements: ['id' => '[1-9]\d*'],
-        methods: 'GET'
-    )]
-    public function show(
-        Category $category,
-        TaskRepository $taskRepository,
-        PaginatorInterface $paginator,
-        Request $request
-    ): Response {
+    #[Route('/{id}', name: 'category_show', requirements: ['id' => '[1-9]\d*'], methods: 'GET')]
+    public function show(Category $category, TaskRepository $taskRepository, PaginatorInterface $paginator, Request $request): Response {
         $tasksQuery = $taskRepository->findTasksByCategory($category);
 
         $pagination = $paginator->paginate(
@@ -107,11 +95,7 @@ class CategoryController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route(
-        '/create',
-        name: 'category_create',
-        methods: 'GET|POST',
-    )]
+    #[Route('/create', name: 'category_create', methods: 'GET|POST',)]
     public function create(Request $request): Response
     {
         $category = new Category();
@@ -187,7 +171,7 @@ class CategoryController extends AbstractController
     #[Route('/{id}/delete', name: 'category_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
     public function delete(Request $request, Category $category): Response
     {
-        if(!$this->categoryService->canBeDeleted($category)) {
+        if (!$this->categoryService->canBeDeleted($category)) {
             $this->addFlash(
                 'warning',
                 $this->translator->trans('message.category_contains_tasks')

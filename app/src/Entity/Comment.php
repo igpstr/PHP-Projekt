@@ -7,8 +7,6 @@ namespace App\Entity;
 
 use App\Repository\CommentRepository;
 use DateTimeImmutable;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -23,8 +21,6 @@ class Comment
 {
     /**
      * Primary key.
-     *
-     * @var int|null
      */
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -33,28 +29,22 @@ class Comment
 
     /**
      * Created at.
-     *
-     * @var DateTimeImmutable|null
      */
     #[ORM\Column(type: 'datetime_immutable')]
-    #[Assert\Type(DateTimeImmutable::class)]
+    #[Assert\Type(\DateTimeImmutable::class)]
     #[Gedmo\Timestampable(on: 'create')]
-    private ?DateTimeImmutable $createdAt;
+    private ?\DateTimeImmutable $createdAt;
 
     /**
      * Updated at.
-     *
-     * @var DateTimeImmutable|null
      */
     #[ORM\Column(type: 'datetime_immutable')]
-    #[Assert\Type(DateTimeImmutable::class)]
+    #[Assert\Type(\DateTimeImmutable::class)]
     #[Gedmo\Timestampable(on: 'update')]
-    private ?DateTimeImmutable $updatedAt;
+    private ?\DateTimeImmutable $updatedAt;
 
     /**
      * Title.
-     *
-     * @var string|null
      */
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\Type('string')]
@@ -75,8 +65,6 @@ class Comment
 
     /**
      * Author.
-     *
-     * @var User|null
      */
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EXTRA_LAZY')]
     #[ORM\JoinColumn(nullable: false)]
@@ -100,9 +88,9 @@ class Comment
     /**
      * Getter for created at.
      *
-     * @return DateTimeImmutable|null Created at
+     * @return \DateTimeImmutable|null Created at
      */
-    public function getCreatedAt(): ?DateTimeImmutable
+    public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
     }
@@ -110,9 +98,9 @@ class Comment
     /**
      * Setter for created at.
      *
-     * @param DateTimeImmutable $createdAt Created at
+     * @param \DateTimeImmutable $createdAt Created at
      */
-    public function setCreatedAt(DateTimeImmutable $createdAt): void
+    public function setCreatedAt(\DateTimeImmutable $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
@@ -120,9 +108,9 @@ class Comment
     /**
      * Getter for updated at.
      *
-     * @return DateTimeImmutable|null Updated at
+     * @return \DateTimeImmutable|null Updated at
      */
-    public function getUpdatedAt(): ?DateTimeImmutable
+    public function getUpdatedAt(): ?\DateTimeImmutable
     {
         return $this->updatedAt;
     }
@@ -130,9 +118,9 @@ class Comment
     /**
      * Setter for updated at.
      *
-     * @param DateTimeImmutable $updatedAt Updated at
+     * @param \DateTimeImmutable $updatedAt Updated at
      */
-    public function setUpdatedAt(DateTimeImmutable $updatedAt): void
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }
@@ -177,11 +165,19 @@ class Comment
         $this->task = $task;
     }
 
+    /**
+     * @return User|null
+     */
     public function getAuthor(): ?User
     {
         return $this->author;
     }
 
+    /**
+     * @param User|null $author
+     *
+     * @return $this
+     */
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
@@ -189,11 +185,19 @@ class Comment
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getComment(): ?string
     {
         return $this->comment;
     }
 
+    /**
+     * @param string|null $comment
+     *
+     * @return $this
+     */
     public function setComment(?string $comment): self
     {
         $this->comment = $comment;

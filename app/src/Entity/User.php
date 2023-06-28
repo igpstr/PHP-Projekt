@@ -22,8 +22,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
      * Primary key.
-     *
-     * @var int|null
      */
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -32,19 +30,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Nick.
-     *
-     * @var string|null
      */
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     #[Assert\NotBlank]
     #[Assert\Nick]
-    //private ?string $nick;
+    // private ?string $nick;
     private ?string $nick = '';
 
     /**
      * Email.
-     *
-     * @var string|null
      */
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     #[Assert\NotBlank]
@@ -61,8 +55,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Password.
-     *
-     * @var string|null
      */
     #[ORM\Column(type: 'string')]
     #[Assert\NotBlank]
@@ -210,6 +202,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
+    /**
+     * @return string
+     */
     public function __toString(): string
     {
         return $this->getNick();

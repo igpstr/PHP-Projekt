@@ -23,9 +23,22 @@ interface CommentServiceInterface
      * @return PaginationInterface<string, mixed> Paginated list
      */
     public function getPaginatedList(int $page): PaginationInterface;
-    public function getPaginatedListByTask(int $page, Task $task): PaginationInterface;
-    public function getPaginatedListByUser(int $page, User $user): PaginationInterface;
 
+    /**
+     * @param int  $page
+     * @param Task $task
+     *
+     * @return PaginationInterface
+     */
+    public function getPaginatedListByTask(int $page, Task $task): PaginationInterface;
+
+    /**
+     * @param int  $page
+     * @param User $user
+     *
+     * @return PaginationInterface
+     */
+    public function getPaginatedListByUser(int $page, User $user): PaginationInterface;
 
     /**
      * Save entity.
