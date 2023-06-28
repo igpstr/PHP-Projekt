@@ -1,4 +1,7 @@
 <?php
+/**
+ * Avatar repository.
+ */
 
 namespace App\Repository;
 
@@ -16,11 +19,20 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class AvatarRepository extends ServiceEntityRepository
 {
+    /**
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Avatar::class);
     }
 
+    /**
+     * @param Avatar $entity
+     * @param bool   $flush
+     *
+     * @return void
+     */
     public function save(Avatar $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
@@ -30,6 +42,12 @@ class AvatarRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @param Avatar $entity
+     * @param bool   $flush
+     *
+     * @return void
+     */
     public function remove(Avatar $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
