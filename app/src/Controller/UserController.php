@@ -71,14 +71,14 @@ class UserController extends AbstractController
     /**
      * Show action.
      *
-     * @param User           $user           User entity
      * @param Request        $request        HTTP request
      * @param CommentService $commentService CommentService
      * @param UserRepository $userRepository UserRepository
+     * @param User           $user           User entity
      *
      * @return Response HTTP response
      */
-    #[Route('/{id}', name: 'user_show', requirements: ['id' => '[1-9]\d*'], methods: 'GET',)]
+    #[Route('/{id}', name: 'user_show', requirements: ['id' => '[1-9]\d*'], methods: 'GET')]
     public function show(Request $request, CommentService $commentService, UserRepository $userRepository, User $user): Response
     {
         $pagination = $commentService->getPaginatedListByUser($request->query->getInt('page', 1), $user);
@@ -96,7 +96,7 @@ class UserController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route('/create', name: 'user_create', methods: 'GET|POST', )]
+    #[Route('/create', name: 'user_create', methods: 'GET|POST')]
     public function create(Request $request): Response
     {
         $user = new User();

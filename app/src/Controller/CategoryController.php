@@ -73,7 +73,8 @@ class CategoryController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}', name: 'category_show', requirements: ['id' => '[1-9]\d*'], methods: 'GET')]
-    public function show(Category $category, TaskRepository $taskRepository, PaginatorInterface $paginator, Request $request): Response {
+    public function show(Category $category, TaskRepository $taskRepository, PaginatorInterface $paginator, Request $request): Response
+    {
         $tasksQuery = $taskRepository->findTasksByCategory($category);
 
         $pagination = $paginator->paginate(
@@ -95,7 +96,7 @@ class CategoryController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route('/create', name: 'category_create', methods: 'GET|POST',)]
+    #[Route('/create', name: 'category_create', methods: 'GET|POST')]
     public function create(Request $request): Response
     {
         $category = new Category();
