@@ -27,11 +27,13 @@
                 <a class="btn btn-outline-success" href="{{ url('task_show', {id: comment.task.id}) }}">{{ comment.task.title }}</a>
             </dd>
         </dl>
+    {% if is_granted('ROLE_ADMIN') %}
         <p>
             <a class="btn btn-secondary btn-sm" href="{{ url('comment_index') }}" title="{{ 'action.back_to_list'|trans }}">
                 {{ 'action.back_to_list'|trans }}
             </a>
         </p>
+    {% endif %}
     {% else %}
         <p>
             {{ 'message.record_not_found'|trans }}

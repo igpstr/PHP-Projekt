@@ -18,14 +18,18 @@
             <dd>{{ user.email }}</dd>
             <dt>{{ 'label.roles'|trans }}</dt>
             <dd>{{ user.roles|join(', ') }}</dd>
-{#            <dt>{{ 'label.password'|trans }}</dt>#}
-{#            <dd>{{  user.password }}</dd>#}
+    {% if is_granted('ROLE_ADMIN') %}
+            <dt>{{ 'label.password'|trans }}</dt>
+            <dd>{{  user.password }}</dd>
+    {% endif %}
         </dl>
+    {% if is_granted('ROLE_ADMIN') %}
         <p>
             <a class="btn btn-secondary btn-sm" href="{{ url('user_index') }}" title="{{ 'action.back_to_list'|trans }}">
                 {{ 'action.back_to_list'|trans }}
             </a>
         </p>
+    {% endif %}
 
         <h2>{{ 'Comments List'|trans }}</h2>
         {% if pagination is defined and pagination.items|length %}
