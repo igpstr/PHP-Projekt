@@ -7,9 +7,11 @@
 {% block body %}
     {% if is_granted('ROLE_ADMIN') %}
     <h1>{{ 'Users List'|trans }}</h1>
-    <a href="{{ url('user_create') }}" title="{{ 'action.create'|trans }}">
+    <div class="text-center">
+        <a class="btn btn-primary" href="{{ url('user_create') }}" title="{{ 'action.create'|trans }}">
         {{ 'Create a new user'|trans }}
-    </a>
+        </a>
+    </div>
     {% if pagination is defined and pagination.items|length %}
 
         <div class="navigation text-center">

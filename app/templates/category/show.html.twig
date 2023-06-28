@@ -8,8 +8,10 @@
     <h1>{{ 'title.category_details'|trans({'%id%': category.id|default('')}) }}</h1>
     {% if category is defined and category|length %}
         <dl class="dl-horizontal">
+    {% if is_granted('ROLE_ADMIN') %}
             <dt>{{ 'label.id'|trans }}</dt>
             <dd>{{ category.id }}</dd>
+    {% endif %}
             <dt>{{ 'label.created_at'|trans }}</dt>
             <dd>{{ category.createdAt|format_date('long') }}</dd>
             <dt>{{ 'label.updated_at'|trans }}</dt>
@@ -18,7 +20,7 @@
             <dd>{{  category.title }}</dd>
         </dl>
         <p>
-            <a href="{{ url('category_index') }}" title="{{ 'action.back_to_list'|trans }}">
+            <a class="btn btn-secondary btn-sm" href="{{ url('category_index') }}" title="{{ 'action.back_to_list'|trans }}">
                 {{ 'action.back_to_list'|trans }}
             </a>
         </p>

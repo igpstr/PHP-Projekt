@@ -8,8 +8,10 @@
     <h1>{{ 'title.user_details'|trans({'%id%': user.id|default('')}) }}</h1>
     {% if user is defined and user|length %}
         <dl class="dl-horizontal">
+    {% if is_granted('ROLE_ADMIN') %}
             <dt>{{ 'label.id'|trans }}</dt>
             <dd>{{ user.id }}</dd>
+        {% endif %}
             <dt>{{ 'label.nick'|trans }}</dt>
             <dd>{{ user.nick }}</dd>
             <dt>{{ 'label.email'|trans }}</dt>
@@ -20,7 +22,7 @@
 {#            <dd>{{  user.password }}</dd>#}
         </dl>
         <p>
-            <a href="{{ url('user_index') }}" title="{{ 'action.back_to_list'|trans }}">
+            <a class="btn btn-secondary btn-sm" href="{{ url('user_index') }}" title="{{ 'action.back_to_list'|trans }}">
                 {{ 'action.back_to_list'|trans }}
             </a>
         </p>

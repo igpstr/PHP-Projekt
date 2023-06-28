@@ -68,17 +68,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\NotBlank]
     private ?string $password;
 
-    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
-    private ?Avatar $avatar = null;
-
-//    /**
-//     * User constructor.
-//     */
-//    public function __construct()
-//    {
-//        $this->nick = new String_(); // Initialize the $nick property with an empty string
-//    }
-
     /**
      * Getter for id.
      *
@@ -224,22 +213,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __toString(): string
     {
         return $this->getNick();
-    }
-
-    public function getAvatar(): ?Avatar
-    {
-        return $this->avatar;
-    }
-
-    public function setAvatar(Avatar $avatar): self
-    {
-        // set the owning side of the relation if necessary
-        if ($avatar->getUser() !== $this) {
-            $avatar->setUser($this);
-        }
-
-        $this->avatar = $avatar;
-
-        return $this;
     }
 }

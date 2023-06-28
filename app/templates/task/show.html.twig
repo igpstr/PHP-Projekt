@@ -8,8 +8,10 @@
     <h1>{{ 'title.task_details'|trans({'%id%': task.id|default('')}) }}</h1>
     {% if task is defined and task|length %}
         <dl class="dl-horizontal">
+    {% if is_granted('ROLE_ADMIN') %}
             <dt>{{ 'label.id'|trans }}</dt>
             <dd>{{ task.id }}</dd>
+            {% endif %}
             <dt>{{ 'label.created_at'|trans }}</dt>
             <dd>{{ task.createdAt|format_date('long') }}</dd>
             <dt>{{ 'label.updated_at'|trans }}</dt>
@@ -28,7 +30,7 @@
             </dd>
         </dl>
         <p>
-            <a href="{{ url('task_index') }}" title="{{ 'action.back_to_list'|trans }}">
+            <a class="btn btn-secondary btn-sm" href="{{ url('task_index') }}" title="{{ 'action.back_to_list'|trans }}">
                 {{ 'action.back_to_list'|trans }}
             </a>
         </p>

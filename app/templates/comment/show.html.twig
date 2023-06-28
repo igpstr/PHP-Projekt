@@ -8,8 +8,10 @@
     <h1>{{ 'title.comment_details'|trans({'%id%': comment.id|default('')}) }}</h1>
     {% if comment is defined and comment|length %}
         <dl class="dl-horizontal">
+            {% if is_granted('ROLE_ADMIN') %}
             <dt>{{ 'label.id'|trans }}</dt>
             <dd>{{ comment.id }}</dd>
+            {% endif %}
             <dt>{{ 'label.created_at'|trans }}</dt>
             <dd>{{ comment.createdAt|format_date('long') }}</dd>
             <dt>{{ 'label.updated_at'|trans }}</dt>
@@ -26,7 +28,7 @@
             </dd>
         </dl>
         <p>
-            <a href="{{ url('comment_index') }}" title="{{ 'action.back_to_list'|trans }}">
+            <a class="btn btn-secondary btn-sm" href="{{ url('comment_index') }}" title="{{ 'action.back_to_list'|trans }}">
                 {{ 'action.back_to_list'|trans }}
             </a>
         </p>

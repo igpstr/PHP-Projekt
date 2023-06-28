@@ -358,6 +358,34 @@
          <source>Sign in</source>
          <target>Zaloguj się</target>
       </trans-unit>
+      <trans-unit id="title.task_create">
+         <source>title.task_create</source>
+         <target>Stwórz post</target>
+      </trans-unit>
+      <trans-unit id="action.save">
+         <source>action.save</source>
+         <target>Stwórz</target>
+      </trans-unit>
+      <trans-unit id="title.category_create">
+         <source>title.category_create</source>
+         <target>Stwórz kategorię</target>
+      </trans-unit>
+      <trans-unit id="title.tag_create">
+         <source>title.tag_create</source>
+         <target>Stwórz tag</target>
+      </trans-unit>
+      <trans-unit id="title.user_create">
+         <source>title.user_create</source>
+         <target>Stwórz użytkownika</target>
+      </trans-unit>
+      <trans-unit id="Create">
+         <source>Create</source>
+         <target>Stwórz</target>
+      </trans-unit>
+      <trans-unit id="title.comment_create">
+         <source>title.comment_create</source>
+         <target>Napisz komentarz</target>
+      </trans-unit>
 <!--       <trans-unit id=""> -->
 <!--          <source></source> -->
 <!--          <target></target> -->
