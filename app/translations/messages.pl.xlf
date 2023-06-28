@@ -402,22 +402,22 @@
          <source>message.form_error</source>
          <target>Błąd!</target>
       </trans-unit>
-<!--       <trans-unit id=""> -->
-<!--          <source></source> -->
-<!--          <target></target> -->
-<!--       </trans-unit> -->
-<!--       <trans-unit id=""> -->
-<!--          <source></source> -->
-<!--          <target></target> -->
-<!--       </trans-unit> -->
-<!--       <trans-unit id=""> -->
-<!--          <source></source> -->
-<!--          <target></target> -->
-<!--       </trans-unit> -->
-<!--       <trans-unit id=""> -->
-<!--          <source></source> -->
-<!--          <target></target> -->
-<!--       </trans-unit> -->
+      <trans-unit id="There are no comments">
+         <source>There are no comments</source>
+         <target>Post nie ma komentarzy.</target>
+      </trans-unit>
+      <trans-unit id="message.category_contains_tasks">
+         <source>message.category_contains_tasks</source>
+         <target>Kategoria zawiera posty</target>
+      </trans-unit>
+      <trans-unit id="User have not created any comments">
+         <source>User have not created any comments</source>
+         <target>Użytkownik nie stworzył żadnych komentarzy</target>
+      </trans-unit>
+      <trans-unit id="Create a new account">
+         <source>Create a new account</source>
+         <target>Stwórz nowe konto</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

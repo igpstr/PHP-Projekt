@@ -402,18 +402,22 @@
          <source>message.form_error</source>
          <target>Error!</target>
       </trans-unit>
-<!--       <trans-unit id=""> -->
-<!--          <source></source> -->
-<!--          <target></target> -->
-<!--       </trans-unit> -->
-<!--       <trans-unit id=""> -->
-<!--          <source></source> -->
-<!--          <target></target> -->
-<!--       </trans-unit> -->
-<!--       <trans-unit id=""> -->
-<!--          <source></source> -->
-<!--          <target></target> -->
-<!--       </trans-unit> -->
+      <trans-unit id="There are no comments">
+         <source>There are no comments</source>
+         <target>There are no comments.</target>
+      </trans-unit>
+      <trans-unit id="message.category_contains_tasks">
+         <source>message.category_contains_tasks</source>
+         <target>Category contains posts</target>
+      </trans-unit>
+      <trans-unit id="User have not created any comments">
+         <source>User have not created any comments</source>
+         <target>User have not created any comments</target>
+      </trans-unit>
+      <trans-unit id="Create a new account">
+         <source>Create a new account</source>
+         <target>Create a new account</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
