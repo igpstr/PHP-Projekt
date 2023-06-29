@@ -18,7 +18,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 /**
  * Class CategoryType.
  */
-class EditAccountType extends AbstractType
+class EditAccountNickType extends AbstractType
 {
     private UserPasswordHasherInterface $passwordHasher;
 
@@ -45,10 +45,10 @@ class EditAccountType extends AbstractType
     {
         $builder
             ->add(
-                'password',
-                PasswordType::class,
+                'nick',
+                TextType::class,
                 [
-                    'label' => 'label.password',
+                    'label' => 'label.nick',
                     'required' => true,
                     'attr' => ['max_length' => 64],
                 ]
@@ -56,12 +56,6 @@ class EditAccountType extends AbstractType
             ->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
                 $form = $event->getForm();
                 $user = $event->getData();
-
-                // Hash the password
-                $hashedPassword = $this->passwordHasher->hashPassword($user, $user->getPassword());
-
-                // Set the hashed password
-                $user->setPassword($hashedPassword);
 
                 $event->setData($user);
             });

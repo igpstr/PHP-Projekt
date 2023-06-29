@@ -18,10 +18,6 @@
             <dd>{{ user.email }}</dd>
             <dt>{{ 'label.roles'|trans }}</dt>
             <dd>{{ user.roles|join(', ') }}</dd>
-    {% if is_granted('ROLE_ADMIN') %}
-            <dt>{{ 'label.password'|trans }}</dt>
-            <dd>{{  user.password }}</dd>
-    {% endif %}
         </dl>
     {% if is_granted('ROLE_ADMIN') %}
         <p>

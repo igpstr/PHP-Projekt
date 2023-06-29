@@ -117,25 +117,21 @@ class SecurityController extends AbstractController
         /** @var PasswordAuthenticatedUserInterface $user */
         $user = $security->getUser();
 
-        $form = $this->createForm(EditAccountType::class, $user);
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            // Hash the password before storing it in the database
-            $hashedPassword = $passwordHasher->hashPassword($user, $user->getPassword());
-            $user->setPassword($hashedPassword);
-
-            // Save the updated user to the database
-            $entityManager = $this->managerRegistry->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            // Redirect to the appropriate page after successful update
-            return $this->redirectToRoute('index');
-        }
-
         return $this->render('security/account.html.twig', [
-            'form' => $form->createView(),
+            'user' => $user,
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param User $user
+     * @return Response
+     */
+    #[Route('/useraccount/{id}', name: 'app_useraccount', requirements: ['id' => '[1-9]\d*'], methods: 'GET')]
+    public function AccountData(Request $request, User $user): Response
+    {
+        return $this->render('security/account.html.twig', [
+            'user' => $user,
         ]);
     }
 }

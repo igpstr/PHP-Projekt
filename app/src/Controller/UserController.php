@@ -6,6 +6,8 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\Type\EditAccountNickType;
+use App\Form\Type\EditAccountType;
 use App\Form\Type\UserType;
 use App\Form\Type\UserEditType;
 use App\Repository\CommentRepository;
@@ -169,6 +171,94 @@ class UserController extends AbstractController
             );
 
             return $this->redirectToRoute('user_index');
+        }
+
+        return $this->render(
+            'user/edit.html.twig',
+            [
+                'form' => $form->createView(),
+                'user' => $user,
+            ]
+        );
+    }
+
+    /**
+     * Edit nick action.
+     *
+     * @param Request $request HTTP request
+     * @param User    $user    User entity
+     *
+     * @return Response HTTP response
+     */
+    #[Route('/{id}/editNick', name: 'user_editNick', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
+    public function editNick(Request $request, User $user): Response
+    {
+        $form = $this->createForm(
+            EditAccountNickType::class,
+            $user,
+            [
+                'method' => 'PUT',
+                'action' => $this->generateUrl('user_editNick', ['id' => $user->getId()]),
+            ]
+        );
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->userService->save($user);
+
+            $this->addFlash(
+                'success',
+                $this->translator->trans('message.edited_successfully')
+            );
+
+            return $this->redirectToRoute('app_account');
+        }
+
+        return $this->render(
+            'user/edit.html.twig',
+            [
+                'form' => $form->createView(),
+                'user' => $user,
+            ]
+        );
+    }
+
+    /**
+     * Edit password action.
+     *
+     * @param Request $request HTTP request
+     * @param User    $user    User entity
+     *
+     * @return Response HTTP response
+     */
+    #[Route('/{id}/editPassword', name: 'user_editPassword', requirements: ['id' => '[1-9]\d*'], methods: 'GET|PUT')]
+    public function editPassword(Request $request, User $user): Response
+    {
+        $form = $this->createForm(
+            EditAccountType::class,
+            $user,
+            [
+                'method' => 'PUT',
+                'action' => $this->generateUrl('user_editPassword', ['id' => $user->getId()]),
+            ]
+        );
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setPassword(
+                $this->passwordHasher->hashPassword(
+                    $user,
+                    $form['password']->getData()
+                )
+            );
+            $this->userService->save($user);
+
+            $this->addFlash(
+                'success',
+                $this->translator->trans('message.edited_successfully')
+            );
+
+            return $this->redirectToRoute('app_account');
         }
 
         return $this->render(
