@@ -7,6 +7,8 @@ namespace App\Entity;
 
 use App\Entity\Enum\UserRole;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -33,8 +35,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     #[Assert\NotBlank]
-    #[Assert\Nick]
-    // private ?string $nick;
     private ?string $nick = '';
 
     /**
@@ -59,6 +59,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string')]
     #[Assert\NotBlank]
     private ?string $password;
+
+    /**
+     * Comment.
+     *
+     * @var Comment
+     */
+    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'author', cascade: ['remove'])]
+    private ?Collection $comments = null;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+    }
 
     /**
      * Getter for id.
@@ -210,5 +226,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __toString(): string
     {
         return $this->getNick();
+    }
+    /**
+     * Getter for comments.
+     *
+     * @return Collection<int, Comment> Comments collection
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    /**
+     * Setter for comments.
+     *
+     * @param Collection<int, Comment>|null $comments Comments
+     */
+    public function setComments(?Collection $comments): void
+    {
+        $this->comments = $comments;
     }
 }

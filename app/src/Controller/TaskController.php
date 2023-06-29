@@ -11,6 +11,7 @@ use App\Repository\TaskRepository;
 use App\Service\CommentService;
 use App\Service\TaskServiceInterface;
 use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,6 +25,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 #[Route('/task')]
 class TaskController extends AbstractController
 {
+    private EntityManagerInterface $entityManager;
+
     /**
      * Task service.
      */
@@ -40,10 +43,11 @@ class TaskController extends AbstractController
      * @param TaskServiceInterface $taskService Task service
      * @param TranslatorInterface  $translator  Translator
      */
-    public function __construct(TaskServiceInterface $taskService, TranslatorInterface $translator)
+    public function __construct(TaskServiceInterface $taskService, TranslatorInterface $translator, EntityManagerInterface $entityManager)
     {
         $this->taskService = $taskService;
         $this->translator = $translator;
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -186,7 +190,14 @@ class TaskController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->taskService->delete($task);
+            // Delete the associated comments before deleting the task
+            $comments = $task->getComments();
+            foreach ($comments as $comment) {
+                $this->entityManager->remove($comment);
+            }
+
+            $this->entityManager->remove($task);
+            $this->entityManager->flush();
 
             $this->addFlash(
                 'success',

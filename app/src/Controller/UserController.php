@@ -8,9 +8,12 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\Type\UserType;
 use App\Form\Type\UserEditType;
+use App\Repository\CommentRepository;
+use App\Repository\TaskRepository;
 use App\Repository\UserRepository;
 use App\Service\CommentService;
 use App\Service\UserServiceInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,6 +28,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 #[Route('/user')]
 class UserController extends AbstractController
 {
+    private EntityManagerInterface $entityManager;
     /**
      * User service.
      */
@@ -44,11 +48,12 @@ class UserController extends AbstractController
      * @param TranslatorInterface         $translator     Translator
      * @param UserPasswordHasherInterface $passwordHasher
      */
-    public function __construct(UserServiceInterface $userService, TranslatorInterface $translator, UserPasswordHasherInterface $passwordHasher)
+    public function __construct(UserServiceInterface $userService, TranslatorInterface $translator, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager)
     {
         $this->userService = $userService;
         $this->translator = $translator;
         $this->passwordHasher = $passwordHasher;
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -184,7 +189,7 @@ class UserController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}/delete', name: 'user_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
-    public function delete(Request $request, User $user): Response
+    public function delete(Request $request, User $user, TaskRepository $taskRepository, CommentRepository $commentRepository): Response
     {
         $form = $this->createForm(
             FormType::class,
@@ -197,6 +202,21 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Get all the tasks associated with the user
+            $tasks = $taskRepository->findBy(['author' => $user]);
+
+            // Loop through the tasks and disassociate them from the user
+            foreach ($tasks as $task) {
+                $task->setAuthor(null);
+            }
+            $comments = $user->getComments();
+            foreach ($comments as $comment) {
+                $this->entityManager->remove($comment);
+            }
+
+            $this->entityManager->remove($user);
+            $this->entityManager->flush();
+
             $this->userService->delete($user);
 
             $this->addFlash(

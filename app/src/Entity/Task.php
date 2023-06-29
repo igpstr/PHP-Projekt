@@ -86,13 +86,17 @@ class Task
      * Author.
      */
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EXTRA_LAZY')]
-    #[ORM\JoinColumn(nullable: false)]
-    #[Assert\NotBlank]
+    #[ORM\JoinColumn(nullable: true)]
     #[Assert\Type(User::class)]
     private ?User $author;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $comment = null;
+    /**
+     * Comment.
+     *
+     * @var Comment
+     */
+    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'task', cascade: ['remove'])]
+    private ?Collection $comments = null;
 
     /**
      * Constructor.
@@ -100,6 +104,7 @@ class Task
     public function __construct()
     {
         $this->tags = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     /**
@@ -272,6 +277,26 @@ class Task
         $this->author = $author;
 
         return $this;
+    }
+
+    /**
+     * Getter for comments.
+     *
+     * @return Collection<int, Comment> Comments collection
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    /**
+     * Setter for comments.
+     *
+     * @param Collection<int, Comment>|null $comments Comments
+     */
+    public function setComments(?Collection $comments): void
+    {
+        $this->comments = $comments;
     }
 
     /**
