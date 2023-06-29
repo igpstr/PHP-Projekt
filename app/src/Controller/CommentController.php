@@ -170,7 +170,7 @@ class CommentController extends AbstractController
      * @return Response HTTP response
      */
     #[Route('/{id}/delete', name: 'comment_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
-    public function delete(Request $request, Comment $comment, Task $task): Response
+    public function delete(Request $request, Comment $comment): Response
     {
         $form = $this->createForm(
             FormType::class,

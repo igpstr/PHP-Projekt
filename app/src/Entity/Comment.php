@@ -57,7 +57,7 @@ class Comment
      *
      * @var Task
      */
-    #[ORM\ManyToOne(targetEntity: Task::class, fetch: 'EXTRA_LAZY')]
+    #[ORM\ManyToOne(targetEntity: Task::class, fetch: 'EXTRA_LAZY', inversedBy: 'comments')]
     #[Assert\Type(Task::class)]
     #[Assert\NotBlank]
     #[ORM\JoinColumn(nullable: false)]
