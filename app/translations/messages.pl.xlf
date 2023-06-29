@@ -418,6 +418,18 @@
          <source>Create a new account</source>
          <target>Stwórz nowe konto</target>
       </trans-unit>
+      <trans-unit id="User Account">
+         <source>User Account</source>
+         <target>Konto użytkownika</target>
+      </trans-unit>
+      <trans-unit id="Change Nick">
+         <source>Change Nick</source>
+         <target>Zmień nazwę</target>
+      </trans-unit>
+      <trans-unit id="Change Password">
+         <source>Change Password</source>
+         <target>Zmień hasło</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
