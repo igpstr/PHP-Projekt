@@ -40,8 +40,9 @@ class TaskController extends AbstractController
     /**
      * Constructor.
      *
-     * @param TaskServiceInterface $taskService Task service
-     * @param TranslatorInterface  $translator  Translator
+     * @param TaskServiceInterface   $taskService   Task service
+     * @param TranslatorInterface    $translator    Translator
+     * @param EntityManagerInterface $entityManager
      */
     public function __construct(TaskServiceInterface $taskService, TranslatorInterface $translator, EntityManagerInterface $entityManager)
     {
@@ -67,19 +68,17 @@ class TaskController extends AbstractController
         return $this->render('task/index.html.twig', ['pagination' => $pagination]);
     }
 
-
     /**
      * Show action.
      *
      * @param Request        $request
      * @param CommentService $commentService
-     * @param TaskRepository $taskRepository
      * @param Task           $task
      *
      * @return Response
      */
     #[Route('/{id}', name: 'task_show', requirements: ['id' => '[1-9]\d*'], methods: 'GET')]
-    public function show(Request $request, CommentService $commentService, TaskRepository $taskRepository, Task $task): Response
+    public function show(Request $request, CommentService $commentService, Task $task): Response
     {
         $pagination = $commentService->getPaginatedListByTask($request->query->getInt('page', 1), $task);
 

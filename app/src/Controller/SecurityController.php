@@ -6,7 +6,6 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\Type\EditAccountType;
 use App\Form\Type\UserType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -44,10 +43,6 @@ class SecurityController extends AbstractController
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
-
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
@@ -72,7 +67,6 @@ class SecurityController extends AbstractController
      * @param UserPasswordHasherInterface $passwordHasher
      *
      * @return Response
-     *
      */
     #[Route(path: '/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $passwordHasher): Response
@@ -100,18 +94,15 @@ class SecurityController extends AbstractController
         ]);
     }
 
-
     /**
      * @Route("/account", name="app_account")
      *
-     * @param Request                     $request
-     * @param UserPasswordHasherInterface $passwordHasher
-     * @param Security                    $security
+     * @param Security $security
      *
      * @return Response
      */
     #[Route(path: '/account', name: 'app_account')]
-    public function changeAccountData(Request $request, UserPasswordHasherInterface $passwordHasher, Security $security): Response
+    public function changeAccountData(Security $security): Response
     {
         // Get the currently logged-in user
         /** @var PasswordAuthenticatedUserInterface $user */
@@ -123,12 +114,12 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @param Request $request
      * @param User $user
+     *
      * @return Response
      */
     #[Route('/useraccount/{id}', name: 'app_useraccount', requirements: ['id' => '[1-9]\d*'], methods: 'GET')]
-    public function AccountData(Request $request, User $user): Response
+    public function accountData(User $user): Response
     {
         return $this->render('security/account.html.twig', [
             'user' => $user,

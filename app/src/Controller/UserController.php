@@ -46,9 +46,10 @@ class UserController extends AbstractController
     /**
      * Constructor.
      *
-     * @param UserServiceInterface        $userService    User service
-     * @param TranslatorInterface         $translator     Translator
+     * @param UserServiceInterface        $userService
+     * @param TranslatorInterface         $translator
      * @param UserPasswordHasherInterface $passwordHasher
+     * @param EntityManagerInterface      $entityManager
      */
     public function __construct(UserServiceInterface $userService, TranslatorInterface $translator, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager)
     {
@@ -273,13 +274,14 @@ class UserController extends AbstractController
     /**
      * Delete action.
      *
-     * @param Request $request HTTP request
-     * @param User    $user    User entity
+     * @param Request        $request        HTTP request
+     * @param User           $user           User entity
+     * @param TaskRepository $taskRepository TaskRepository
      *
      * @return Response HTTP response
      */
     #[Route('/{id}/delete', name: 'user_delete', requirements: ['id' => '[1-9]\d*'], methods: 'GET|DELETE')]
-    public function delete(Request $request, User $user, TaskRepository $taskRepository, CommentRepository $commentRepository): Response
+    public function delete(Request $request, User $user, TaskRepository $taskRepository): Response
     {
         $form = $this->createForm(
             FormType::class,

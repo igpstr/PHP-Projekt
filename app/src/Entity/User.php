@@ -202,7 +202,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @see UserInterface
      *
-     * @return string|null
+     * @return string
      */
     public function getSalt(): ?string
     {
@@ -227,6 +227,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->getNick();
     }
+
     /**
      * Getter for comments.
      *

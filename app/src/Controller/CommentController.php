@@ -80,7 +80,7 @@ class CommentController extends AbstractController
      * Create action.
      *
      * @param Request $request HTTP request
-     * @param Task    $task
+     * @param Task    $task    Task
      *
      * @return Response HTTP response
      */
@@ -115,7 +115,6 @@ class CommentController extends AbstractController
             ['form' => $form->createView()]
         );
     }
-
 
     /**
      * Edit action.
@@ -165,7 +164,6 @@ class CommentController extends AbstractController
      *
      * @param Request $request HTTP request
      * @param Comment $comment Comment entity
-     * @param Task    $task
      *
      * @return Response HTTP response
      */
