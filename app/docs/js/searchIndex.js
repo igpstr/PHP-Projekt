@@ -171,6 +171,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controller-SecurityController.html#method_changeAccountData"
         },                {
+            "fqsen": "\\App\\Controller\\SecurityController\u003A\u003AaccountData\u0028\u0029",
+            "name": "accountData",
+            "summary": "",
+            "url": "classes/App-Controller-SecurityController.html#method_accountData"
+        },                {
             "fqsen": "\\App\\Controller\\SecurityController\u003A\u003A\u0024managerRegistry",
             "name": "managerRegistry",
             "summary": "",
@@ -256,6 +261,11 @@ Search.appendIndex(
             "summary": "Delete\u0020action.",
             "url": "classes/App-Controller-TaskController.html#method_delete"
         },                {
+            "fqsen": "\\App\\Controller\\TaskController\u003A\u003A\u0024entityManager",
+            "name": "entityManager",
+            "summary": "",
+            "url": "classes/App-Controller-TaskController.html#property_entityManager"
+        },                {
             "fqsen": "\\App\\Controller\\TaskController\u003A\u003A\u0024taskService",
             "name": "taskService",
             "summary": "Task\u0020service.",
@@ -296,10 +306,25 @@ Search.appendIndex(
             "summary": "Edit\u0020action.",
             "url": "classes/App-Controller-UserController.html#method_edit"
         },                {
+            "fqsen": "\\App\\Controller\\UserController\u003A\u003AeditNick\u0028\u0029",
+            "name": "editNick",
+            "summary": "Edit\u0020nick\u0020action.",
+            "url": "classes/App-Controller-UserController.html#method_editNick"
+        },                {
+            "fqsen": "\\App\\Controller\\UserController\u003A\u003AeditPassword\u0028\u0029",
+            "name": "editPassword",
+            "summary": "Edit\u0020password\u0020action.",
+            "url": "classes/App-Controller-UserController.html#method_editPassword"
+        },                {
             "fqsen": "\\App\\Controller\\UserController\u003A\u003Adelete\u0028\u0029",
             "name": "delete",
             "summary": "Delete\u0020action.",
             "url": "classes/App-Controller-UserController.html#method_delete"
+        },                {
+            "fqsen": "\\App\\Controller\\UserController\u003A\u003A\u0024entityManager",
+            "name": "entityManager",
+            "summary": "",
+            "url": "classes/App-Controller-UserController.html#property_entityManager"
         },                {
             "fqsen": "\\App\\Controller\\UserController\u003A\u003A\u0024userService",
             "name": "userService",
@@ -861,6 +886,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Entity-Task.html#method_setAuthor"
         },                {
+            "fqsen": "\\App\\Entity\\Task\u003A\u003AgetComments\u0028\u0029",
+            "name": "getComments",
+            "summary": "Getter\u0020for\u0020comments.",
+            "url": "classes/App-Entity-Task.html#method_getComments"
+        },                {
+            "fqsen": "\\App\\Entity\\Task\u003A\u003AsetComments\u0028\u0029",
+            "name": "setComments",
+            "summary": "Setter\u0020for\u0020comments.",
+            "url": "classes/App-Entity-Task.html#method_setComments"
+        },                {
             "fqsen": "\\App\\Entity\\Task\u003A\u003AgetComment\u0028\u0029",
             "name": "getComment",
             "summary": "",
@@ -911,15 +946,20 @@ Search.appendIndex(
             "summary": "Author.",
             "url": "classes/App-Entity-Task.html#property_author"
         },                {
-            "fqsen": "\\App\\Entity\\Task\u003A\u003A\u0024comment",
-            "name": "comment",
-            "summary": "",
-            "url": "classes/App-Entity-Task.html#property_comment"
+            "fqsen": "\\App\\Entity\\Task\u003A\u003A\u0024comments",
+            "name": "comments",
+            "summary": "Comment.",
+            "url": "classes/App-Entity-Task.html#property_comments"
         },                {
             "fqsen": "\\App\\Entity\\User",
             "name": "User",
             "summary": "Class\u0020User.",
             "url": "classes/App-Entity-User.html"
+        },                {
+            "fqsen": "\\App\\Entity\\User\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "Constructor.",
+            "url": "classes/App-Entity-User.html#method___construct"
         },                {
             "fqsen": "\\App\\Entity\\User\u003A\u003AgetId\u0028\u0029",
             "name": "getId",
@@ -991,6 +1031,16 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Entity-User.html#method___toString"
         },                {
+            "fqsen": "\\App\\Entity\\User\u003A\u003AgetComments\u0028\u0029",
+            "name": "getComments",
+            "summary": "Getter\u0020for\u0020comments.",
+            "url": "classes/App-Entity-User.html#method_getComments"
+        },                {
+            "fqsen": "\\App\\Entity\\User\u003A\u003AsetComments\u0028\u0029",
+            "name": "setComments",
+            "summary": "Setter\u0020for\u0020comments.",
+            "url": "classes/App-Entity-User.html#method_setComments"
+        },                {
             "fqsen": "\\App\\Entity\\User\u003A\u003A\u0024id",
             "name": "id",
             "summary": "Primary\u0020key.",
@@ -1015,6 +1065,11 @@ Search.appendIndex(
             "name": "password",
             "summary": "Password.",
             "url": "classes/App-Entity-User.html#property_password"
+        },                {
+            "fqsen": "\\App\\Entity\\User\u003A\u003A\u0024comments",
+            "name": "comments",
+            "summary": "Comment.",
+            "url": "classes/App-Entity-User.html#property_comments"
         },                {
             "fqsen": "\\App\\Form\\DataTransformer\\TagsDataTransformer",
             "name": "TagsDataTransformer",
@@ -2060,6 +2115,26 @@ Search.appendIndex(
             "name": "findOneByTitle",
             "summary": "Find\u0020by\u0020title.",
             "url": "classes/App-Service-UserServiceInterface.html#method_findOneByTitle"
+        },                {
+            "fqsen": "\\App\\Form\\Type\\EditAccountNickType",
+            "name": "EditAccountNickType",
+            "summary": "Class\u0020CategoryType.",
+            "url": "classes/App-Form-Type-EditAccountNickType.html"
+        },                {
+            "fqsen": "\\App\\Form\\Type\\EditAccountNickType\u003A\u003AbuildForm\u0028\u0029",
+            "name": "buildForm",
+            "summary": "Builds\u0020the\u0020form.",
+            "url": "classes/App-Form-Type-EditAccountNickType.html#method_buildForm"
+        },                {
+            "fqsen": "\\App\\Form\\Type\\EditAccountNickType\u003A\u003AconfigureOptions\u0028\u0029",
+            "name": "configureOptions",
+            "summary": "Configures\u0020the\u0020options\u0020for\u0020this\u0020type.",
+            "url": "classes/App-Form-Type-EditAccountNickType.html#method_configureOptions"
+        },                {
+            "fqsen": "\\App\\Form\\Type\\EditAccountNickType\u003A\u003AgetBlockPrefix\u0028\u0029",
+            "name": "getBlockPrefix",
+            "summary": "Returns\u0020the\u0020prefix\u0020of\u0020the\u0020template\u0020block\u0020name\u0020for\u0020this\u0020type.",
+            "url": "classes/App-Form-Type-EditAccountNickType.html#method_getBlockPrefix"
         },                {
             "fqsen": "\\",
             "name": "\\",

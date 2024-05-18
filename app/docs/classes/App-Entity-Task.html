@@ -170,11 +170,11 @@
 <dd>Category.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
-    <a href="classes/App-Entity-Task.html#property_comment">$comment</a>
+    <a href="classes/App-Entity-Task.html#property_comments">$comments</a>
     <span>
-                        &nbsp;: string|null            </span>
+                        &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>|null            </span>
 </dt>
-<dd></dd>
+<dd>Comment.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/App-Entity-Task.html#property_content">$content</a>
@@ -254,6 +254,13 @@
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/App-Entity-Task.html#method_getComments">getComments()</a>
+    <span>
+                                &nbsp;: <abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;int, <a href="classes/App-Entity-Comment.html"><abbr title="\App\Entity\Comment">Comment</abbr></a>&gt;    </span>
+</dt>
+<dd>Getter for comments.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/App-Entity-Task.html#method_getContent">getContent()</a>
     <span>
                                 &nbsp;: string|null    </span>
@@ -322,6 +329,13 @@
                                 &nbsp;: $this    </span>
 </dt>
 <dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/App-Entity-Task.html#method_setComments">setComments()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Setter for comments.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/App-Entity-Task.html#method_setContent">setContent()</a>
@@ -444,30 +458,29 @@
             -private
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="property_comment">
-        $comment
-        <a href="classes/App-Entity-Task.html#property_comment" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="property_comments">
+        $comments
+        <a href="classes/App-Entity-Task.html#property_comments" class="headerlink"><i class="fas fa-link"></i></a>
         <span class="phpdocumentor-element__modifiers">
                                 </span>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Task.php"><a href="files/src-entity-task.html"><abbr title="src/Entity/Task.php">Task.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">94</span>
+    <span class="phpdocumentor-element-found-in__line">98</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Comment.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
-        <span class="phpdocumentor-signature__type">string|null</span>
-    <span class="phpdocumentor-signature__name">$comment</span>
+        <span class="phpdocumentor-signature__type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>|null</span>
+    <span class="phpdocumentor-signature__name">$comments</span>
      = <span class="phpdocumentor-signature__default-value">null</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
-
+    
+    
     
 
 </article>
@@ -694,7 +707,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Task.php"><a href="files/src-entity-task.html"><abbr title="src/Entity/Task.php">Task.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">100</span>
+    <span class="phpdocumentor-element-found-in__line">104</span>
 
     </aside>
 
@@ -727,7 +740,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Task.php"><a href="files/src-entity-task.html"><abbr title="src/Entity/Task.php">Task.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">240</span>
+    <span class="phpdocumentor-element-found-in__line">245</span>
 
     </aside>
 
@@ -772,7 +785,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Task.php"><a href="files/src-entity-task.html"><abbr title="src/Entity/Task.php">Task.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">260</span>
+    <span class="phpdocumentor-element-found-in__line">265</span>
 
     </aside>
 
@@ -804,7 +817,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Task.php"><a href="files/src-entity-task.html"><abbr title="src/Entity/Task.php">Task.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">200</span>
+    <span class="phpdocumentor-element-found-in__line">205</span>
 
     </aside>
 
@@ -839,7 +852,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Task.php"><a href="files/src-entity-task.html"><abbr title="src/Entity/Task.php">Task.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">280</span>
+    <span class="phpdocumentor-element-found-in__line">305</span>
 
     </aside>
 
@@ -864,6 +877,41 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_getComments">
+        getComments()
+        <a href="classes/App-Entity-Task.html#method_getComments" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Task.php"><a href="files/src-entity-task.html"><abbr title="src/Entity/Task.php">Task.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">287</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Getter for comments.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">getComments</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;int, <a href="classes/App-Entity-Comment.html"><abbr title="\App\Entity\Comment">Comment</abbr></a>&gt;</span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;int, <a href="classes/App-Entity-Comment.html"><abbr title="\App\Entity\Comment">Comment</abbr></a>&gt;</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>Comments collection</p>
+</section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_getContent">
         getContent()
         <a href="classes/App-Entity-Task.html#method_getContent" class="headerlink"><i class="fas fa-link"></i></a>
@@ -871,7 +919,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Task.php"><a href="files/src-entity-task.html"><abbr title="src/Entity/Task.php">Task.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">180</span>
+    <span class="phpdocumentor-element-found-in__line">185</span>
 
     </aside>
 
@@ -906,7 +954,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Task.php"><a href="files/src-entity-task.html"><abbr title="src/Entity/Task.php">Task.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">120</span>
+    <span class="phpdocumentor-element-found-in__line">125</span>
 
     </aside>
 
@@ -941,7 +989,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Task.php"><a href="files/src-entity-task.html"><abbr title="src/Entity/Task.php">Task.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">110</span>
+    <span class="phpdocumentor-element-found-in__line">115</span>
 
     </aside>
 
@@ -976,7 +1024,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Task.php"><a href="files/src-entity-task.html"><abbr title="src/Entity/Task.php">Task.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">220</span>
+    <span class="phpdocumentor-element-found-in__line">225</span>
 
     </aside>
 
@@ -1011,7 +1059,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Task.php"><a href="files/src-entity-task.html"><abbr title="src/Entity/Task.php">Task.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">160</span>
+    <span class="phpdocumentor-element-found-in__line">165</span>
 
     </aside>
 
@@ -1046,7 +1094,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Task.php"><a href="files/src-entity-task.html"><abbr title="src/Entity/Task.php">Task.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">140</span>
+    <span class="phpdocumentor-element-found-in__line">145</span>
 
     </aside>
 
@@ -1081,7 +1129,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Task.php"><a href="files/src-entity-task.html"><abbr title="src/Entity/Task.php">Task.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">252</span>
+    <span class="phpdocumentor-element-found-in__line">257</span>
 
     </aside>
 
@@ -1126,7 +1174,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Task.php"><a href="files/src-entity-task.html"><abbr title="src/Entity/Task.php">Task.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">270</span>
+    <span class="phpdocumentor-element-found-in__line">275</span>
 
     </aside>
 
@@ -1168,7 +1216,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Task.php"><a href="files/src-entity-task.html"><abbr title="src/Entity/Task.php">Task.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">210</span>
+    <span class="phpdocumentor-element-found-in__line">215</span>
 
     </aside>
 
@@ -1213,7 +1261,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Task.php"><a href="files/src-entity-task.html"><abbr title="src/Entity/Task.php">Task.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">290</span>
+    <span class="phpdocumentor-element-found-in__line">315</span>
 
     </aside>
 
@@ -1248,6 +1296,51 @@
             -public
                                                         "
 >
+    <h4 class="phpdocumentor-element__name" id="method_setComments">
+        setComments()
+        <a href="classes/App-Entity-Task.html#method_setComments" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Task.php"><a href="files/src-entity-task.html"><abbr title="src/Entity/Task.php">Task.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">297</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Setter for comments.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                <span class="phpdocumentor-signature__name">setComments</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;int, <a href="classes/App-Entity-Comment.html"><abbr title="\App\Entity\Comment">Comment</abbr></a>&gt;|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$comments</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$comments</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Doctrine\Common\Collections\Collection">Collection</abbr>&lt;int, <a href="classes/App-Entity-Comment.html"><abbr title="\App\Entity\Comment">Comment</abbr></a>&gt;|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Comments</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">void</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
     <h4 class="phpdocumentor-element__name" id="method_setContent">
         setContent()
         <a href="classes/App-Entity-Task.html#method_setContent" class="headerlink"><i class="fas fa-link"></i></a>
@@ -1255,7 +1348,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Task.php"><a href="files/src-entity-task.html"><abbr title="src/Entity/Task.php">Task.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">190</span>
+    <span class="phpdocumentor-element-found-in__line">195</span>
 
     </aside>
 
@@ -1300,7 +1393,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Task.php"><a href="files/src-entity-task.html"><abbr title="src/Entity/Task.php">Task.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">130</span>
+    <span class="phpdocumentor-element-found-in__line">135</span>
 
     </aside>
 
@@ -1345,7 +1438,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Task.php"><a href="files/src-entity-task.html"><abbr title="src/Entity/Task.php">Task.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">230</span>
+    <span class="phpdocumentor-element-found-in__line">235</span>
 
     </aside>
 
@@ -1390,7 +1483,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Task.php"><a href="files/src-entity-task.html"><abbr title="src/Entity/Task.php">Task.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">170</span>
+    <span class="phpdocumentor-element-found-in__line">175</span>
 
     </aside>
 
@@ -1435,7 +1528,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/Entity/Task.php"><a href="files/src-entity-task.html"><abbr title="src/Entity/Task.php">Task.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">150</span>
+    <span class="phpdocumentor-element-found-in__line">155</span>
 
     </aside>
 

@@ -430,6 +430,22 @@
          <source>Change Password</source>
          <target>Change Password</target>
       </trans-unit>
+      <trans-unit id="About page">
+         <source>About page</source>
+         <target>About page</target>
+      </trans-unit>
+      <trans-unit id="The author of this website is Ignacy Pstrągowski.">
+         <source>The author of this website is Ignacy Pstrągowski.</source>
+         <target>The author of this website is Ignacy Pstrągowski.</target>
+      </trans-unit>
+      <trans-unit id="Notka1">
+         <source>Notka1</source>
+         <target>This website is an integral part of his bachelor's thesis (major: electronic information processing)</target>
+      </trans-unit>
+      <trans-unit id="Notka2">
+         <source>Notka2</source>
+         <target>prepared under the direction of Dr. Piotr Śliwinski at the Faculty of Management and Social Communication of Jagiellonian University.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

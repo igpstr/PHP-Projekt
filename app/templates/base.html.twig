@@ -44,6 +44,17 @@
                             </a>
                         </li>
                         {% endif %}
+                        <li>
+                            <a href="{{ url('hello_index') }}" class="nav-link link-dark" title="{{ 'About page'|trans }}">
+                                {{ 'About page'|trans }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('change_locale', {'locale': 'en'}) }}" title="English">
+                                <img src="{{ asset('images/en_flag.png') }}" alt="English" style="width: 35px; height: auto; display: flex;
+                                     margin-left: 10px; margin-top: 10px;">
+                            </a>
+                        </li>
                     </ul>
             </div>
 
