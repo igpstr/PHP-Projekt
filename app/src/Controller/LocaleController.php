@@ -6,26 +6,23 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class LocaleController extends AbstractController
 {
     /**
      * @Route("/change-locale/{locale}", name="change_locale")
      */
-    public function changeLocale($locale, Request $request, RouterInterface $router): RedirectResponse
+    public function changeLocale(string $locale, Request $request, SessionInterface $session): RedirectResponse
     {
-        // Set the locale in the session
-        $request->getSession()->set('_locale', $locale);
+        // Store the locale in the session
+        $session->set('_locale', $locale);
 
-        // Get the last visited URL
+        // Redirect back to the referring page
         $referer = $request->headers->get('referer');
-        $url = $referer ? $referer : $router->generate('homepage'); // 'homepage' should be replaced with your actual home route name
-
-        return new RedirectResponse($url);
+        return $this->redirect($referer);
     }
 }
