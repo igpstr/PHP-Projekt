@@ -46,6 +46,13 @@ class Task
     private ?\DateTimeImmutable $updatedAt;
 
     /**
+     * Premiered at.
+     */
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    #[Assert\Type(\DateTime::class)]
+    private ?\DateTime $premieredAt = null;
+
+    /**
      * Title.
      */
     #[ORM\Column(type: 'string', length: 255)]
@@ -156,6 +163,27 @@ class Task
     {
         $this->updatedAt = $updatedAt;
     }
+
+    /**
+     * Getter for premiered at.
+     *
+     * @return \DateTime|null Premiered at
+     */
+    public function getPremieredAt(): ?\DateTime
+    {
+        return $this->premieredAt;
+    }
+
+    /**
+     * Setter for premiered at.
+     *
+     * @param \DateTime|null $premieredAt Premiered at
+     */
+    public function setPremieredAt(?\DateTime $premieredAt): void
+    {
+        $this->premieredAt = $premieredAt;
+    }
+
 
     /**
      * Getter for title.

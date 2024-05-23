@@ -10,6 +10,7 @@ use App\Entity\Task;
 use App\Form\DataTransformer\TagsDataTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -87,6 +88,17 @@ class TaskType extends AbstractType
                 'attr' => ['max_length' => 128],
             ]
         );
+
+        $builder->add(
+            'premieredAt',
+            DateType::class,
+            [
+                'widget' => 'single_text',
+                'required' => false,
+                'label' => 'label.premiered_at',
+            ]
+        );
+
 
         $builder->get('tags')->addModelTransformer(
             $this->tagsDataTransformer

@@ -86,6 +86,10 @@
          <source>Updated at</source>
          <target>Updated at</target>
       </trans-unit>
+      <trans-unit id="Premiered at">
+         <source>Premiered at</source>
+         <target>Premiered at</target>
+      </trans-unit>
       <trans-unit id="Title">
          <source>Title</source>
          <target>Title</target>
@@ -117,6 +121,10 @@
       <trans-unit id="label.updated_at">
          <source>label.updated_at</source>
          <target>Updated at</target>
+      </trans-unit>
+      <trans-unit id="label.premiered_at">
+         <source>label.premiered_at</source>
+         <target>Premiered at</target>
       </trans-unit>
       <trans-unit id="label.category">
          <source>label.category</source>

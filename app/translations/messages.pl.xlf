@@ -48,7 +48,7 @@
       </trans-unit>
       <trans-unit id="Tasks List">
          <source>Tasks List</source>
-         <target>Lista filmów</target>
+         <target>Lista filmów Andrzeja Wajdy</target>
       </trans-unit>
       <trans-unit id="Tasks">
          <source>Tasks</source>
@@ -84,6 +84,10 @@
       </trans-unit>
       <trans-unit id="Updated at">
          <source>Updated at</source>
+         <target>Data aktualizacji treści</target>
+      </trans-unit>
+      <trans-unit id="Premiered at">
+         <source>Premiered at</source>
          <target>Data premiery</target>
       </trans-unit>
       <trans-unit id="Title">
@@ -116,6 +120,10 @@
       </trans-unit>
       <trans-unit id="label.updated_at">
          <source>label.updated_at</source>
+         <target>Data aktualizacji treści</target>
+      </trans-unit>
+      <trans-unit id="label.premiered_at">
+         <source>label.premiered_at</source>
          <target>Data premiery</target>
       </trans-unit>
       <trans-unit id="label.category">
