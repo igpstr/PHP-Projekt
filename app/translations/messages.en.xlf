@@ -462,6 +462,10 @@
          <source>label.name</source>
          <target>Name and surname</target>
       </trans-unit>
+      <trans-unit id="label.biography">
+         <source>label.biography</source>
+         <target>Biography</target>
+      </trans-unit>
       <trans-unit id="Content">
          <source>Content</source>
          <target>Content</target>

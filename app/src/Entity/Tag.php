@@ -7,6 +7,7 @@ namespace App\Entity;
 
 use App\Repository\TagRepository;
 use DateTimeImmutable;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -52,6 +53,22 @@ class Tag
     #[Assert\NotBlank]
     #[Assert\Length(min: 3, max: 64)]
     private ?string $title;
+
+    /**
+     * Content.
+     */
+    #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank]
+    private ?string $content;
+
+    /**
+     * Image.
+     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Assert\Type('string')]
+    #[Assert\Image(maxSize: "2M")]
+//    #[Assert\Image(mimeTypes: "image/jpeg" OR "image/png" OR "image/gif")]
+    private ?string $image = null;
 
     /**
      * Slug.
@@ -130,6 +147,44 @@ class Tag
     public function setTitle(?string $title): void
     {
         $this->title = $title;
+    }
+
+    /**
+     * Getter for content.
+     *
+     * @return string|null Content
+     */
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    /**
+     * Setter for content.
+     *
+     * @param string $content Content
+     */
+    public function setContent(string $content): void
+    {
+        $this->content = $content;
+    }
+
+    /**
+     * Getter for image.
+     */
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    /**
+     * Setter for image.
+     */
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
     }
 
     /**

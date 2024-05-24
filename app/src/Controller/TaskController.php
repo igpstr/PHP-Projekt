@@ -123,18 +123,23 @@ class TaskController extends AbstractController
             $imageFile = $form->get('image')->getData();
 
             if ($imageFile) {
-                $newFilename = uniqid().'.'.$imageFile->guessExtension();
+                // Get the original filename
+                $originalFilename = $imageFile->getClientOriginalName();
+                // Sanitize the filename
+                $safeFilename = $this->slugger->slug($originalFilename);
 
                 try {
+                    // Move the file to the directory where images are stored using the original filename
                     $imageFile->move(
                         $this->getParameter('images_directory'),
-                        $newFilename
+                        $originalFilename
                     );
                 } catch (FileException $e) {
                     // Handle exception if something happens during file upload
                 }
 
-                $task->setImage($newFilename);
+                // Update the 'image' property to store the original image file name
+                $task->setImage($originalFilename);
             }
 
             $this->taskService->save($task);

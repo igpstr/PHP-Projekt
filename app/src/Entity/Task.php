@@ -234,11 +234,17 @@ class Task
         $this->content = $content;
     }
 
+    /**
+     * Getter for image.
+     */
     public function getImage(): ?string
     {
         return $this->image;
     }
 
+    /**
+     * Setter for image.
+     */
     public function setImage(?string $image): self
     {
         $this->image = $image;

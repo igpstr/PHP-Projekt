@@ -12,10 +12,13 @@ use App\Service\TagServiceInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 /**
  * Class TagController.
@@ -108,6 +111,29 @@ class TagController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $imageFile */
+            $imageFile = $form->get('image')->getData();
+
+            if ($imageFile) {
+                // Get the original filename
+                $originalFilename = $imageFile->getClientOriginalName();
+                // Sanitize the filename
+//                $safeFilename = $this->slugger->slug($originalFilename);
+
+                try {
+                    // Move the file to the directory where images are stored using the original filename
+                    $imageFile->move(
+                        $this->getParameter('images_directory'),
+                        $originalFilename
+                    );
+                } catch (FileException $e) {
+                    // Handle exception if something happens during file upload
+                }
+
+                // Update the 'image' property to store the original image file name
+                $tag->setImage($originalFilename);
+            }
+
             $this->tagService->save($tag);
 
             $this->addFlash(
@@ -143,6 +169,38 @@ class TagController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $imageFile */
+            $imageFile = $form->get('image')->getData();
+
+            if ($imageFile) {
+                // Get the original filename
+                $originalFilename = $imageFile->getClientOriginalName();
+                // Sanitize the filename
+//                $safeFilename = $this->slugger->slug($originalFilename);
+
+                try {
+                    // Move the file to the directory where images are stored using the original filename
+                    $imageFile->move(
+                        $this->getParameter('images_directory'),
+                        $originalFilename
+                    );
+                } catch (FileException $e) {
+                    // Handle exception if something happens during file upload
+                }
+
+                // If there's an old image, remove it
+                $oldImage = $tag->getImage();
+                if ($oldImage) {
+                    $oldImagePath = $this->getParameter('images_directory').'/'.$oldImage;
+                    if (file_exists($oldImagePath)) {
+                        unlink($oldImagePath);
+                    }
+                }
+
+                // Update the 'image' property to store the original image file name
+                $tag->setImage($originalFilename);
+            }
+
             $this->tagService->save($tag);
 
             $this->addFlash(

@@ -6,6 +6,8 @@
 
 {% block body %}
     <h1>{{ 'title.tag_details'|trans({'%id%': tag.id|default('')}) }}</h1>
+    <div class="row">
+    <div class="col-md-8">
     {% if tag is defined and tag|length %}
         <dl class="dl-horizontal">
     {% if is_granted('ROLE_ADMIN') %}
@@ -18,12 +20,22 @@
             <dd>{{ tag.updatedAt|format_date('long') }}</dd>
             <dt>{{ 'label.name'|trans }}</dt>
             <dd>{{  tag.title }}</dd>
+            <dt>{{ 'label.biography'|trans }}</dt>
+            <dd>{{  tag.content }}</dd>
         </dl>
         <p>
             <a class="btn btn-secondary btn-sm" href="{{ url('tag_index') }}" title="{{ 'action.back_to_list'|trans }}">
                 {{ 'action.back_to_list'|trans }}
             </a>
         </p>
+
+        </div>
+        <div class="col-md-4" style="text-align: center">
+            {% if tag.image %}
+                <img src="{{ asset('uploads/images/' ~ tag.image) }}" alt="{{ tag.title }}" style="max-width: 100%;">
+            {% endif %}
+        </div>
+        </div>
 
         <h2>{{ 'Tasks List'|trans }}</h2>
         {% if pagination is defined and pagination.items|length %}
