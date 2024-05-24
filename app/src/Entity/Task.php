@@ -69,6 +69,15 @@ class Task
     private ?string $content;
 
     /**
+     * Image.
+     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Assert\Type('string')]
+    #[Assert\Image(maxSize: "2M")]
+//    #[Assert\Image(mimeTypes: "image/jpeg" OR "image/png" OR "image/gif")]
+    private ?string $image = null;
+
+    /**
      * Category.
      *
      * @var Category
@@ -223,6 +232,18 @@ class Task
     public function setContent(string $content): void
     {
         $this->content = $content;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
     }
 
     /**

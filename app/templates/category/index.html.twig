@@ -22,7 +22,9 @@
         <table class="table table-striped">
             <thead>
             <tr>
+    {% if is_granted('ROLE_ADMIN') %}
                 <th>{{ knp_pagination_sortable(pagination, 'Id'|trans, 'category.id') }}</th>
+    {% endif %}
                 <th>{{ knp_pagination_sortable(pagination, 'Created at'|trans, 'category.createdAt') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'Updated at'|trans, 'category.updatedAt') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'Title'|trans, 'category.title') }}</th>
@@ -32,7 +34,9 @@
             <tbody>
             {% for category in pagination.items %}
                 <tr>
+                    {% if is_granted('ROLE_ADMIN') %}
                     <td>{{ category.id }}</td>
+                    {% endif %}
                     <td>{{ category.createdAt|format_date('long') }}</td>
                     <td>{{ category.updatedAt|format_date('long') }}</td>
                     <td>{{ category.title }}</td>

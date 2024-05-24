@@ -18,6 +18,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 /**
  * Class TaskController.
@@ -38,17 +41,23 @@ class TaskController extends AbstractController
     private TranslatorInterface $translator;
 
     /**
+     * Slugger.
+     */
+    private SluggerInterface $slugger;
+
+    /**
      * Constructor.
      *
      * @param TaskServiceInterface   $taskService   Task service
      * @param TranslatorInterface    $translator    Translator
      * @param EntityManagerInterface $entityManager
      */
-    public function __construct(TaskServiceInterface $taskService, TranslatorInterface $translator, EntityManagerInterface $entityManager)
+    public function __construct(TaskServiceInterface $taskService, TranslatorInterface $translator, EntityManagerInterface $entityManager, SluggerInterface $slugger)
     {
         $this->taskService = $taskService;
         $this->translator = $translator;
         $this->entityManager = $entityManager;
+        $this->slugger = $slugger;
     }
 
     /**
@@ -110,6 +119,24 @@ class TaskController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $imageFile */
+            $imageFile = $form->get('image')->getData();
+
+            if ($imageFile) {
+                $newFilename = uniqid().'.'.$imageFile->guessExtension();
+
+                try {
+                    $imageFile->move(
+                        $this->getParameter('images_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // Handle exception if something happens during file upload
+                }
+
+                $task->setImage($newFilename);
+            }
+
             $this->taskService->save($task);
 
             $this->addFlash(
@@ -148,6 +175,38 @@ class TaskController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $imageFile */
+            $imageFile = $form->get('image')->getData();
+
+            if ($imageFile) {
+                // Get the original filename
+                $originalFilename = $imageFile->getClientOriginalName();
+                // Sanitize the filename
+                $safeFilename = $this->slugger->slug($originalFilename);
+
+                try {
+                    // Move the file to the directory where images are stored using the original filename
+                    $imageFile->move(
+                        $this->getParameter('images_directory'),
+                        $originalFilename
+                    );
+                } catch (FileException $e) {
+                    // Handle exception if something happens during file upload
+                }
+
+                // If there's an old image, remove it
+                $oldImage = $task->getImage();
+                if ($oldImage) {
+                    $oldImagePath = $this->getParameter('images_directory').'/'.$oldImage;
+                    if (file_exists($oldImagePath)) {
+                        unlink($oldImagePath);
+                    }
+                }
+
+                // Update the 'image' property to store the original image file name
+                $task->setImage($originalFilename);
+            }
+
             $this->taskService->save($task);
 
             $this->addFlash(

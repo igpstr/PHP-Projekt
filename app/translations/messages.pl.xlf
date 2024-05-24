@@ -456,6 +456,22 @@
          <target>przygotowanej pod kierunkiem dr Piotra Śliwińskiego na Wydziale Zarządzania i Komunikacji Społecznej
                          Uniwersytetu Jagiellońskiego.</target>
       </trans-unit>
+      <trans-unit id="label.image">
+         <source>label.image</source>
+         <target>Zdjęcie</target>
+      </trans-unit>
+      <trans-unit id="label.name">
+         <source>label.name</source>
+         <target>Imię i nazwisko</target>
+      </trans-unit>
+      <trans-unit id="Content">
+         <source>Content</source>
+         <target>Treść</target>
+      </trans-unit>
+<!--       <trans-unit id="Please upload a valid image file."> -->
+<!--          <source>Please upload a valid image file.</source> -->
+<!--          <target>Nieprawidłowy format pliku.</target> -->
+<!--       </trans-unit> -->
     </body>
   </file>
 </xliff>

@@ -6,6 +6,8 @@
 
 {% block body %}
     <h1>{{ 'title.task_details'|trans({'%id%': task.id|default('')}) }}</h1>
+    <div class="row">
+    <div class="col-md-8">
     {% if task is defined and task|length %}
         <dl class="dl-horizontal">
     {% if is_granted('ROLE_ADMIN') %}
@@ -16,6 +18,8 @@
             <dd>{{ task.createdAt|format_date('long') }}</dd>
             <dt>{{ 'label.updated_at'|trans }}</dt>
             <dd>{{ task.updatedAt|format_date('long') }}</dd>
+            <dt>{{ 'label.premiered_at'|trans }}</dt>
+            <dd>{{ task.premieredAt|format_date('long') }}</dd>
             <dt>{{ 'label.title'|trans }}</dt>
             <dd>{{  task.title }}</dd>
             <dt>{{ 'label.content'|trans }}</dt>
@@ -34,6 +38,14 @@
                 {{ 'action.back_to_list'|trans }}
             </a>
         </p>
+
+        </div>
+        <div class="col-md-4" style="text-align: center">
+            {% if task.image %}
+                <img src="{{ asset('uploads/images/' ~ task.image) }}" alt="{{ task.title }}" style="max-width: 100%;">
+            {% endif %}
+        </div>
+        </div>
 
         {% if is_granted('ROLE_USER') %}
             <div class="text-center">
@@ -54,27 +66,25 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
+            {% if is_granted('ROLE_ADMIN') %}
                     <th>{{ knp_pagination_sortable(pagination, 'Id'|trans, 'comment.id') }}</th>
+            {% endif %}
                     <th>{{ knp_pagination_sortable(pagination, 'Created at'|trans, 'comment.createdAt') }}</th>
-                    <th>{{ knp_pagination_sortable(pagination, 'Updated at'|trans, 'comment.updatedAt') }}</th>
-                    <th>{{ knp_pagination_sortable(pagination, 'Title'|trans, 'comment.title') }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'Content'|trans, 'comment.title') }}</th>
                     <th>{{ knp_pagination_sortable(pagination, 'Author'|trans, 'comment.author') }}</th>
-                    <th>{{ knp_pagination_sortable(pagination, 'Task'|trans, 'task.title') }}</th>
                     <th>{{ 'Actions'|trans }}</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for comment in pagination.items %}
                     <tr>
+                        {% if is_granted('ROLE_ADMIN') %}
                         <td>{{ comment.id }}</td>
+                        {% endif %}
                         <td>{{ comment.createdAt|format_date('long') }}</td>
-                        <td>{{ comment.updatedAt|format_date('long') }}</td>
                         <td>{{ comment.title }}</td>
                         <td>
                             <a class="btn btn-outline-secondary" href="{{ url('user_show', {id: comment.author.id}) }}">{{ comment.author }}</a>
-                        </td>
-                        <td>
-                            <a class="btn btn-outline-success" href="{{ url('task_show', {id: comment.task.id}) }}">{{ comment.task.title }}</a>
                         </td>
                         <td>
                             <a class="btn btn-outline-primary" href="{{ url('comment_show', {id: comment.id}) }}" title="{{ 'action.show'|trans }}">

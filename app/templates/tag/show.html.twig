@@ -16,7 +16,7 @@
             <dd>{{ tag.createdAt|format_date('long') }}</dd>
             <dt>{{ 'label.updated_at'|trans }}</dt>
             <dd>{{ tag.updatedAt|format_date('long') }}</dd>
-            <dt>{{ 'label.title'|trans }}</dt>
+            <dt>{{ 'label.name'|trans }}</dt>
             <dd>{{  tag.title }}</dd>
         </dl>
         <p>
@@ -35,9 +35,12 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
+            {% if is_granted('ROLE_ADMIN') %}
                     <th>{{ knp_pagination_sortable(pagination, 'Id'|trans, 'task.id') }}</th>
+            {% endif %}
                     <th>{{ knp_pagination_sortable(pagination, 'Created at'|trans, 'task.createdAt') }}</th>
                     <th>{{ knp_pagination_sortable(pagination, 'Updated at'|trans, 'task.updatedAt') }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'Premiered at'|trans, 'task.premieredAt') }}</th>
                     <th>{{ knp_pagination_sortable(pagination, 'Title'|trans, 'task.title') }}</th>
                     <th>{{ knp_pagination_sortable(pagination, 'Category'|trans, 'category.title') }}</th>
                     <th>{{ knp_pagination_sortable(pagination, 'Tags'|trans, 'tag.title') }}</th>
@@ -47,9 +50,12 @@
                 <tbody>
                 {% for task in pagination.items %}
                     <tr>
+                        {% if is_granted('ROLE_ADMIN') %}
                         <td>{{ task.id }}</td>
+                        {% endif %}
                         <td>{{ task.createdAt|format_date('long') }}</td>
                         <td>{{ task.updatedAt|format_date('long') }}</td>
+                        <td>{{ task.premieredAt|format_date('long') }}</td>
                         <td>{{ task.title }}</td>
                         <td>
                             <a class="btn btn-outline-info" href="{{ url('category_show', {id: task.category.id}) }}">{{ task.category.title }}</a>

@@ -12,6 +12,9 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -59,13 +62,29 @@ class TaskType extends AbstractType
         );
         $builder->add(
             'content',
-            TextType::class,
+            TextAreaType::class,
             [
                 'label' => 'label.content',
                 'required' => true,
                 // 'attr' => ['max_length' => 255],
             ]
         );
+        $builder->add('image', FileType::class, [
+            'label' => 'label.image',
+            'mapped' => false,
+            'required' => false,
+            'constraints' => [
+                new File([
+                    'maxSize' => '2M',
+                    'mimeTypes' => [
+                        'image/jpeg',
+                        'image/png',
+                        'image/gif',
+                    ],
+                    'mimeTypesMessage' => 'Please upload a valid image file.',
+                ])
+            ],
+        ]);
         $builder->add(
             'category',
             EntityType::class,

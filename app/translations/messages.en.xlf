@@ -454,6 +454,22 @@
          <source>Notka2</source>
          <target>prepared under the direction of Dr. Piotr Śliwinski at the Faculty of Management and Social Communication of Jagiellonian University.</target>
       </trans-unit>
+      <trans-unit id="label.image">
+         <source>label.image</source>
+         <target>Image</target>
+      </trans-unit>
+      <trans-unit id="label.name">
+         <source>label.name</source>
+         <target>Name and surname</target>
+      </trans-unit>
+      <trans-unit id="Content">
+         <source>Content</source>
+         <target>Content</target>
+      </trans-unit>
+<!--       <trans-unit id="Please upload a valid image file."> -->
+<!--          <source>Please upload a valid image file.</source> -->
+<!--          <target>Please uplvdvdoad a valid image file.</target> -->
+<!--       </trans-unit> -->
     </body>
   </file>
 </xliff>
