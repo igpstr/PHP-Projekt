@@ -46,7 +46,7 @@ class TagType extends AbstractType
             TextAreaType::class,
             [
                 'label' => 'label.content',
-                'required' => true,
+                'required' => false,
                 // 'attr' => ['max_length' => 255],
             ]
         );

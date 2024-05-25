@@ -179,7 +179,8 @@ class TaskController extends AbstractController
         );
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+//        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             /** @var UploadedFile $imageFile */
             $imageFile = $form->get('image')->getData();
 
@@ -199,14 +200,16 @@ class TaskController extends AbstractController
                     // Handle exception if something happens during file upload
                 }
 
+//                $task->setImage(null);
+
                 // If there's an old image, remove it
-                $oldImage = $task->getImage();
-                if ($oldImage) {
-                    $oldImagePath = $this->getParameter('images_directory').'/'.$oldImage;
-                    if (file_exists($oldImagePath)) {
-                        unlink($oldImagePath);
-                    }
-                }
+//                $oldImage = $task->getImage();
+//                if ($oldImage) {
+//                    $oldImagePath = $this->getParameter('images_directory').'/'.$oldImage;
+//                    if (file_exists($oldImagePath)) {
+//                        unlink($oldImagePath);
+//                    }
+//                }
 
                 // Update the 'image' property to store the original image file name
                 $task->setImage($originalFilename);
@@ -244,7 +247,7 @@ class TaskController extends AbstractController
     {
         $form = $this->createForm(
             FormType::class,
-            $task,
+            null,
             [
                 'method' => 'DELETE',
                 'action' => $this->generateUrl('task_delete', ['id' => $task->getId()]),
@@ -253,12 +256,36 @@ class TaskController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Log the deletion attempt
+            error_log('Attempting to delete task with ID: ' . $task->getId());
+
             // Delete the associated comments before deleting the task
             $comments = $task->getComments();
             foreach ($comments as $comment) {
                 $this->entityManager->remove($comment);
             }
 
+//            // Check if the task has an image and delete the image file
+//            if ($task->getImage()) {
+//                $imagePath = $this->getParameter('images_directory') . '/' . $task->getImage();
+//                // Log the image deletion attempt
+//                error_log('Attempting to delete image: ' . $imagePath);
+//
+//                if (file_exists($imagePath)) {
+//                    if (unlink($imagePath)) {
+//                        // Log successful image deletion
+//                        error_log('Image deleted successfully: ' . $imagePath);
+//                    } else {
+//                        // Log failed image deletion
+//                        error_log('Failed to delete image: ' . $imagePath);
+//                    }
+//                } else {
+//                    // Log image file not found
+//                    error_log('Image file not found: ' . $imagePath);
+//                }
+//            }
+
+            // Remove the task entity
             $this->entityManager->remove($task);
             $this->entityManager->flush();
 

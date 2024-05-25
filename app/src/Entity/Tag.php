@@ -57,8 +57,7 @@ class Tag
     /**
      * Content.
      */
-    #[ORM\Column(type: Types::TEXT)]
-    #[Assert\NotBlank]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $content;
 
     /**
