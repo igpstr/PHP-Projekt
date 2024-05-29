@@ -20,7 +20,7 @@
       </trans-unit>
       <trans-unit id="label.tags">
         <source>label.tags</source>
-        <target>Tags</target>
+        <target>Actors</target>
       </trans-unit>
       <trans-unit id="message.empty_list">
         <source>message.empty_list</source>
@@ -40,31 +40,31 @@
       </trans-unit>
       <trans-unit id="task_index">
         <source>task_index</source>
-        <target>Posts</target>
+        <target>Movies</target>
       </trans-unit>
       <trans-unit id="category_index">
          <source>category_index</source>
-         <target>Categories</target>
+         <target>Genre</target>
       </trans-unit>
       <trans-unit id="Tasks List">
          <source>Tasks List</source>
-         <target>Posts List</target>
+         <target>Movies List</target>
       </trans-unit>
       <trans-unit id="Tasks">
          <source>Tasks</source>
-         <target>Posts</target>
+         <target>Movies</target>
       </trans-unit>
       <trans-unit id="Categories">
          <source>Categories</source>
-         <target>Categories</target>
+         <target>Genres</target>
       </trans-unit>
       <trans-unit id="tag_index">
          <source>tag_index</source>
-         <target>Tags</target>
+         <target>Actors</target>
       </trans-unit>
       <trans-unit id="Tags">
          <source>Tags</source>
-         <target>Tags</target>
+         <target>Actors</target>
       </trans-unit>
       <trans-unit id="Login">
          <source>Login</source>
@@ -96,7 +96,7 @@
       </trans-unit>
       <trans-unit id="Category">
          <source>Category</source>
-         <target>Category</target>
+         <target>Genre</target>
       </trans-unit>
       <trans-unit id="Actions">
          <source>Actions</source>
@@ -112,7 +112,7 @@
       </trans-unit>
       <trans-unit id="title.task_details">
          <source>title.task_details</source>
-         <target>Post details</target>
+         <target>Movie details</target>
       </trans-unit>
       <trans-unit id="label.created_at">
          <source>label.created_at</source>
@@ -128,11 +128,11 @@
       </trans-unit>
       <trans-unit id="label.category">
          <source>label.category</source>
-         <target>Category</target>
+         <target>Genre</target>
       </trans-unit>
       <trans-unit id="label.tag">
          <source>label.tag</source>
-         <target>Tags</target>
+         <target>Actors</target>
       </trans-unit>
       <trans-unit id="action.back_to_list">
          <source>action.back_to_list</source>
@@ -148,7 +148,7 @@
       </trans-unit>
       <trans-unit id="Task">
          <source>Task</source>
-         <target>Post</target>
+         <target>Movie</target>
       </trans-unit>
       <trans-unit id="Continue without logging in">
          <source>Continue without logging in</source>
@@ -184,7 +184,7 @@
       </trans-unit>
       <trans-unit id="Create a new task">
          <source>Create a new task</source>
-         <target>Create a new post</target>
+         <target>Add a new movie</target>
       </trans-unit>
       <trans-unit id="action.edit">
          <source>action.edit</source>
@@ -220,7 +220,7 @@
       </trans-unit>
       <trans-unit id="title.task_edit">
          <source>title.task_edit</source>
-         <target>Edit post</target>
+         <target>Edit movie details</target>
       </trans-unit>
       <trans-unit id="label.none">
          <source>label.none</source>
@@ -228,47 +228,47 @@
       </trans-unit>
       <trans-unit id="title.task_delete">
          <source>title.task_delete</source>
-         <target>Delete post</target>
+         <target>Delete movie</target>
       </trans-unit>
       <trans-unit id="Categories List">
          <source>Categories List</source>
-         <target>Categories List</target>
+         <target>Genres List</target>
       </trans-unit>
       <trans-unit id="Create a new category">
          <source>Create a new category</source>
-         <target>Create a new category</target>
+         <target>Create a new genre</target>
       </trans-unit>
       <trans-unit id="title.category_details">
          <source>title.category_details</source>
-         <target>Category details</target>
+         <target>Genre details</target>
       </trans-unit>
       <trans-unit id="title.category_edit">
          <source>title.category_edit</source>
-         <target>Edit category</target>
+         <target>Edit genre</target>
       </trans-unit>
       <trans-unit id="title.category_delete">
          <source>title.category_delete</source>
-         <target>Delete category</target>
+         <target>Delete genre</target>
       </trans-unit>
       <trans-unit id="Tags List">
          <source>Tags List</source>
-         <target>Tags List</target>
+         <target>Actors List</target>
       </trans-unit>
       <trans-unit id="Create a new tag">
          <source>Create a new tag</source>
-         <target>Create a new tag</target>
+         <target>Add a new actor biography</target>
       </trans-unit>
       <trans-unit id="title.tag_details">
          <source>title.tag_details</source>
-         <target>Tag details</target>
+         <target>Actor biography details</target>
       </trans-unit>
       <trans-unit id="title.tag_edit">
          <source>title.tag_edit</source>
-         <target>Edit tag</target>
+         <target>Edit actor biography</target>
       </trans-unit>
       <trans-unit id="title.tag_delete">
          <source>title.tag_delete</source>
-         <target>Delete tag</target>
+         <target>Delete actor biography</target>
       </trans-unit>
       <trans-unit id="Users List">
          <source>Users List</source>
@@ -332,7 +332,7 @@
       </trans-unit>
       <trans-unit id="label.task">
          <source>label.task</source>
-         <target>Post</target>
+         <target>Movie</target>
       </trans-unit>
       <trans-unit id="title.comment_edit">
          <source>title.comment_edit</source>
@@ -368,7 +368,7 @@
       </trans-unit>
       <trans-unit id="title.task_create">
          <source>title.task_create</source>
-         <target>Create a post</target>
+         <target>Add a movie</target>
       </trans-unit>
       <trans-unit id="action.save">
          <source>action.save</source>
@@ -376,11 +376,11 @@
       </trans-unit>
       <trans-unit id="title.category_create">
          <source>title.category_create</source>
-         <target>Create a category</target>
+         <target>Add a genre</target>
       </trans-unit>
       <trans-unit id="title.tag_create">
          <source>title.tag_create</source>
-         <target>Create a tag</target>
+         <target>Add an actor</target>
       </trans-unit>
       <trans-unit id="title.user_create">
          <source>title.user_create</source>
@@ -416,7 +416,7 @@
       </trans-unit>
       <trans-unit id="message.category_contains_tasks">
          <source>message.category_contains_tasks</source>
-         <target>Category contains posts</target>
+         <target>Genre contains movies</target>
       </trans-unit>
       <trans-unit id="User have not created any comments">
          <source>User have not created any comments</source>
@@ -456,6 +456,10 @@
       </trans-unit>
       <trans-unit id="label.image">
          <source>label.image</source>
+         <target>Image</target>
+      </trans-unit>
+      <trans-unit id="Image">
+         <source>Image</source>
          <target>Image</target>
       </trans-unit>
       <trans-unit id="label.name">

@@ -72,9 +72,11 @@ class Task
      * Image.
      */
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    #[Assert\Type('string')]
-    #[Assert\Image(maxSize: "2M")]
-//    #[Assert\Image(mimeTypes: "image/jpeg" OR "image/png" OR "image/gif")]
+    #[Assert\Type(type: 'string', groups: ['Default', 'edit'])]
+    #[Assert\Image(
+        maxSize: '2M',
+        mimeTypes: ['image/jpeg', 'image/png', 'image/gif'],
+    )]
     private ?string $image = null;
 
     /**

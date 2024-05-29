@@ -55,7 +55,6 @@
                     <th>{{ knp_pagination_sortable(pagination, 'Premiered at'|trans, 'task.premieredAt') }}</th>
                     <th>{{ knp_pagination_sortable(pagination, 'Title'|trans, 'task.title') }}</th>
                     <th>{{ knp_pagination_sortable(pagination, 'Category'|trans, 'category.title') }}</th>
-                    <th>{{ knp_pagination_sortable(pagination, 'Tags'|trans, 'tag.title') }}</th>
                     <th>{{ 'Actions'|trans }}</th>
                 </tr>
                 </thead>
@@ -71,11 +70,6 @@
                         <td>{{ task.title }}</td>
                         <td>
                             <a class="btn btn-outline-info" href="{{ url('category_show', {id: task.category.id}) }}">{{ task.category.title }}</a>
-                        </td>
-                        <td>
-                            {% for tag in task.tags %}
-                                <a class="btn btn-outline-dark" href="{{ url('tag_show', {id: tag.id}) }}">{{ tag.title }}</a>
-                            {% endfor %}
                         </td>
                         <td>
                             <a class="btn btn-outline-primary" href="{{ url('task_show', {id: task.id}) }}" title="{{ 'action.show'|trans }}">

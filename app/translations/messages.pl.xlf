@@ -220,7 +220,7 @@
       </trans-unit>
       <trans-unit id="title.task_edit">
          <source>title.task_edit</source>
-         <target>Edytuj film</target>
+         <target>Edytuj dane filmu</target>
       </trans-unit>
       <trans-unit id="label.none">
          <source>label.none</source>
@@ -256,7 +256,7 @@
       </trans-unit>
       <trans-unit id="Create a new tag">
          <source>Create a new tag</source>
-         <target>Dodaj nową biografię aktora</target>
+         <target>Dodaj nowego aktora</target>
       </trans-unit>
       <trans-unit id="title.tag_details">
          <source>title.tag_details</source>
@@ -458,6 +458,10 @@
       </trans-unit>
       <trans-unit id="label.image">
          <source>label.image</source>
+         <target>Zdjęcie</target>
+      </trans-unit>
+      <trans-unit id="Image">
+         <source>Image</source>
          <target>Zdjęcie</target>
       </trans-unit>
       <trans-unit id="label.name">

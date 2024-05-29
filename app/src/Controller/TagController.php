@@ -19,6 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Class TagController.
@@ -26,6 +27,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 #[Route('/tag')]
 class TagController extends AbstractController
 {
+    private EntityManagerInterface $entityManager;
     /**
      * Tag service.
      */
@@ -41,11 +43,13 @@ class TagController extends AbstractController
      *
      * @param TagServiceInterface $tagService Tag service
      * @param TranslatorInterface $translator Translator
+     * @param EntityManagerInterface $entityManager
      */
-    public function __construct(TagServiceInterface $tagService, TranslatorInterface $translator)
+    public function __construct(TagServiceInterface $tagService, TranslatorInterface $translator, EntityManagerInterface $entityManager)
     {
         $this->tagService = $tagService;
         $this->translator = $translator;
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -241,8 +245,10 @@ class TagController extends AbstractController
         );
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->tagService->delete($tag);
+//        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
+            $this->entityManager->remove($tag);
+            $this->entityManager->flush();
 
             $this->addFlash(
                 'success',

@@ -5,6 +5,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Tag;
 use App\Entity\Task;
 use App\Form\Type\TaskType;
 use App\Repository\TaskRepository;
@@ -118,7 +119,8 @@ class TaskController extends AbstractController
         );
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+//        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             /** @var UploadedFile $imageFile */
             $imageFile = $form->get('image')->getData();
 
@@ -140,6 +142,24 @@ class TaskController extends AbstractController
 
                 // Update the 'image' property to store the original image file name
                 $task->setImage($originalFilename);
+            }
+
+            $tags = $form->get('tags')->getData();
+            // Remove all existing tags from the task
+            foreach ($task->getTags() as $tag) {
+                $task->removeTag($tag);
+            }
+
+// Add new or existing tags to the task
+            foreach ($tags as $tag) {
+                // Check if the tag already exists
+                $existingTag = $this->entityManager->getRepository(Tag::class)->findOneBy(['title' => $tag->getTitle()]);
+                if ($existingTag) {
+                    $task->addTag($existingTag);
+                } else {
+                    // If the tag doesn't exist, add it to the task
+                    $task->addTag($tag);
+                }
             }
 
             $this->taskService->save($task);
@@ -213,6 +233,24 @@ class TaskController extends AbstractController
 
                 // Update the 'image' property to store the original image file name
                 $task->setImage($originalFilename);
+            }
+
+            $tags = $form->get('tags')->getData();
+            // Remove all existing tags from the task
+            foreach ($task->getTags() as $tag) {
+                $task->removeTag($tag);
+            }
+
+// Add new or existing tags to the task
+            foreach ($tags as $tag) {
+                // Check if the tag already exists
+                $existingTag = $this->entityManager->getRepository(Tag::class)->findOneBy(['title' => $tag->getTitle()]);
+                if ($existingTag) {
+                    $task->addTag($existingTag);
+                } else {
+                    // If the tag doesn't exist, add it to the task
+                    $task->addTag($tag);
+                }
             }
 
             $this->taskService->save($task);
