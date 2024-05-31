@@ -48,7 +48,7 @@
       </trans-unit>
       <trans-unit id="Tasks List">
          <source>Tasks List</source>
-         <target>Lista filmów Andrzeja Wajdy</target>
+         <target>Baza filmów Andrzeja Wajdy</target>
       </trans-unit>
       <trans-unit id="Tasks">
          <source>Tasks</source>

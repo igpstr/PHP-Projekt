@@ -48,7 +48,7 @@
       </trans-unit>
       <trans-unit id="Tasks List">
          <source>Tasks List</source>
-         <target>Movies List</target>
+         <target>Andrzej Wajda's movies database</target>
       </trans-unit>
       <trans-unit id="Tasks">
          <source>Tasks</source>
@@ -140,7 +140,7 @@
       </trans-unit>
       <trans-unit id="Comments List">
          <source>Comments List</source>
-         <target>Comments List</target>
+         <target>Comments list</target>
       </trans-unit>
       <trans-unit id="Author">
          <source>Author</source>
@@ -232,7 +232,7 @@
       </trans-unit>
       <trans-unit id="Categories List">
          <source>Categories List</source>
-         <target>Genres List</target>
+         <target>Genres list</target>
       </trans-unit>
       <trans-unit id="Create a new category">
          <source>Create a new category</source>
@@ -252,7 +252,7 @@
       </trans-unit>
       <trans-unit id="Tags List">
          <source>Tags List</source>
-         <target>Actors List</target>
+         <target>Actors list</target>
       </trans-unit>
       <trans-unit id="Create a new tag">
          <source>Create a new tag</source>
@@ -272,7 +272,7 @@
       </trans-unit>
       <trans-unit id="Users List">
          <source>Users List</source>
-         <target>Users List</target>
+         <target>Users list</target>
       </trans-unit>
       <trans-unit id="Create a new user">
          <source>Create a new user</source>

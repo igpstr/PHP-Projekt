@@ -1,10 +1,72 @@
-p {
-    color: red;
+.navbar-items {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    white-space: nowrap;
+    gap: 5px;
 }
-.header {
-    padding: 60px;
-    text-align: center;
-    background: #1abc9c;
-    color: red;
-    font-size: 30px;
+
+.navbar-items li {
+    display: inline;
+}
+
+.language-flag {
+    width: 35px;
+    height: auto;
+    display: flex;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+/*@media (max-width: 767.98px) {*/
+/*    .navbar-items .nav-link {*/
+/*        justify-content: center;*/
+/*    }*/
+
+/*    .language-flag {*/
+/*        width: 25px;*/
+/*        margin-left: 5px;*/
+/*        margin-top: 5px;*/
+/*    }*/
+/*}*/
+
+/*@media (min-width: 576px) and (max-width: 767.98px) {*/
+/*    .navbar-items .nav-link {*/
+/*        font-size: 14px;*/
+/*    }*/
+
+/*    .language-flag {*/
+/*        width: 30px;*/
+/*        margin-left: 7px;*/
+/*        margin-top: 7px;*/
+/*    }*/
+/*}*/
+
+/*@media (min-width: 768px) and (max-width: 991.98px) {*/
+/*    .navbar-items .nav-link {*/
+/*        font-size: 16px;*/
+/*    }*/
+
+/*    .language-flag {*/
+/*        width: 35px;*/
+/*        margin-left: 10px;*/
+/*        margin-top: 10px;*/
+/*    }*/
+/*}*/
+
+/*@media (min-width: 992px) {*/
+/*    .navbar-items .nav-link {*/
+/*        font-size: 18px;*/
+/*    }*/
+/*}*/
+
+/* Override Bootstrap's default behavior to keep navbar items horizontal */
+.navbar {
+    flex-direction: row !important;
+}
+.navbar-nav {
+    flex-direction: row !important;
+}
+.navbar-container {
+    flex-direction: row !important;
 }

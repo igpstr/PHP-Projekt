@@ -22,7 +22,9 @@
         <table class="table table-striped">
             <thead>
             <tr>
+    {% if is_granted('ROLE_ADMIN') %}
                 <th>{{ knp_pagination_sortable(pagination, 'Id'|trans, 'task.id') }}</th>
+    {% endif %}
                 <th>{{ knp_pagination_sortable(pagination, 'Created at'|trans, 'task.createdAt') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'Updated at'|trans, 'task.updatedAt') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'Premiered at'|trans, 'task.premieredAt') }}</th>
@@ -34,7 +36,9 @@
             <tbody>
             {% for task in pagination.items %}
                 <tr>
+                    {% if is_granted('ROLE_ADMIN') %}
                     <td>{{ task.id }}</td>
+                    {% endif %}
                     <td>{{ task.createdAt|format_date('long') }}</td>
                     <td>{{ task.updatedAt|format_date('long') }}</td>
                     <td>{{ task.premieredAt|format_date('long') }}</td>
